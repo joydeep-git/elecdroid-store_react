@@ -13,7 +13,7 @@ const HeroSection = ({ name }) => {
                 <div className='heroText'>
                     <p>Welcome to</p>
                     <h1>{name}</h1>
-                    <p>use coupone code "NEW2023" to get extra 5% off on fashion products.</p>
+                    <p>use coupone code "NEW2023" to get extra 5% off on products.</p>
                     <button>
                         <Link to="/products" className='button'>Shop Now</Link>
                     </button>
