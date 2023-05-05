@@ -1,0 +1,171 @@
+// * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+//     font-family: $font-family-work-sans;
+// }
+
+// html {
+//     font-size: 62.5%;
+//     overflow-x: hidden;
+// }
+
+// body {
+//     overflow-x: hidden;
+//     scrollbar-color: $color-heading;
+//     scrollbar-width: thin;
+// }
+
+// body::-webkit-scrollbar {
+//     width: 1.5rem;
+// }
+
+// body::-webkit-scrollbar-track {
+//     background-color: $color-bg;
+// }
+
+// body::-webkit-scrollbar-thumb {
+//     background: $color-white;
+//     border: 5px solid transparent;
+//     border-radius: 9px;
+//     background-clip: content-box;
+// }
+
+// h1,
+// h2,
+// h3,
+// h4 {
+//     font-family: $font-family-work-sans;
+// }
+
+// h1 {
+//     color: $color-heading;
+//     font-size: $font-size-h1;
+//     font-weight: $font-weight-h1;
+// }
+
+// h2 {
+//     color: $color-heading;
+//     font-size: $font-size-h2;
+//     font-weight: $font-weight-h2;
+//     white-space: normal;
+// }
+
+// h3 {
+//     font-size: $font-size-h3;
+//     font-weight: $font-weight-h3;
+// }
+
+// p,
+// button {
+//     color: $color-text;
+//     font-size: $font-size-p;
+//     line-height: 1.5;
+//     font-weight: $font-weight-p;
+// }
+
+// a {
+//     text-decoration: none;
+// }
+
+// li {
+//     list-style: none;
+// }
+
+// /* Reusable code section */
+// .container {
+//     max-width: 120rem;
+//     margin: 0 auto;
+// }
+
+// .grid {
+//     display: grid;
+//     gap: 9rem;
+// }
+
+// .grid-two-column {
+//     grid-template-columns: repeat(2, 1fr);
+// }
+
+// .grid-three-column {
+//     grid-template-columns: repeat(3, 1fr);
+// }
+
+// .grid-four-column {
+//     grid-template-columns: 1fr 1.2fr 0.5fr 0.8fr;
+// }
+
+// .grid-five-column {
+//     grid-template-columns: repeat(5, 1fr);
+// }
+
+// .common-heading {
+//     font-size: 3.8rem;
+//     font-weight: 600;
+//     margin-bottom: 6rem;
+//     text-transform: capitalize;
+// }
+
+// .intro-data {
+//     margin-bottom: 0;
+//     text-transform: uppercase;
+//     color: #5138ee;
+// }
+
+// .caption {
+//     position: absolute;
+//     top: 15%;
+//     right: 10%;
+//     text-transform: uppercase;
+//     color: $color-helper;
+//     padding: 0.8rem 2rem;
+//     font-size: 1.2rem;
+//     border-radius: 2rem;
+// }
+
+// input,
+// textarea {
+//     max-width: 50rem;
+//     color: $color-black;
+//     padding: 1.6rem 2.4rem;
+//     border: 1px solid $color-border;
+//     text-transform: uppercase;
+//     box-shadow: $color-shadow-support;
+// }
+
+// input[type="submit"] {
+//     max-width: 16rem;
+//     margin-top: 2rem;
+//     background-color: $color-btn;
+//     color: $color-white;
+//     padding: 1.4rem 2.2rem;
+//     border-style: solid;
+//     border-width: 0.1rem;
+//     text-transform: uppercase;
+//     font-size: 1.8rem;
+//     cursor: pointer;
+// }
+
+// /* Media queries */
+// @media (max-width: $media-tab) {
+//     .container {
+//         max-width: 130rem;
+//         padding: 0 3.2rem;
+//     }
+// }
+
+// @media (max-width: $media-mobile) {
+//     html {
+//         font-size: 50%;
+//     }
+
+//     .grid {
+//         gap: 3.2rem;
+//     }
+
+//     .grid-two-column,
+//     .grid-three-column,
+//     .grid-four-column {
+//         grid-template-columns: 1fr;
+//     }
+// }

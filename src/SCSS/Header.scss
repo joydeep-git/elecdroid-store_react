@@ -1,0 +1,134 @@
+@import "./Variables.scss";
+
+.Header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 2rem;
+    box-shadow: $color-shadow-support;
+    background-color: $color-bg-white;
+    text-transform: uppercase;
+
+    .logo {
+        display: flex;
+        flex-direction: row;
+        border: 2px solid $color-bg;
+        font-size: 1rem;
+        align-items: center;
+        font-weight: 600;
+        padding: 4px;
+
+        .elec {
+            background-color: $color-heading;
+            color: $color-bg-white;
+            padding: 4px;
+        }
+
+        .droid {
+            padding: 3px;
+            color: black;
+        }
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .navList {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+
+        .nav {
+            display: flex;
+            flex-direction: row;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+
+            .Link {
+                color: $color-black;
+
+                &:hover {
+                    color: $color-heading;
+                }
+            }
+        }
+
+        .login {
+            padding: 7px 10px;
+            border: none;
+            background-color: $color-btn;
+            color: $color-white;
+            cursor: pointer;
+            font-size: 1rem;
+
+            &:hover {
+                border-radius: 15px;
+                transition: ease-in 0.3s;
+                color: rgb(47, 255, 5);
+            }
+        }
+
+        .cart {
+            height: 2rem;
+            width: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+
+            &:hover {
+                background: $color-text;
+                border-radius: 50%;
+                padding: 1rem;
+            }
+
+            .cart-icon {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    
+    .Header {
+        padding: 0.5rem 1rem;
+        .menu {
+            display: contents;
+            font-size: 1.5rem;
+        }
+
+        .navList {
+            display: none;
+        }
+
+        #open {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: min-content;
+            width: min-content;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 4rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            .nav{
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+
+}
