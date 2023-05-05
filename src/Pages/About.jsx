@@ -1,8 +1,11 @@
 import React from 'react';
+import HeroSection from '../Components/HeroSection';
 
 const About = () => {
     return (
-        <div>About</div>
+        <div className='About'>
+            <HeroSection name={"ElecDroid E-commerce Store"} />
+        </div>
     )
 }
 

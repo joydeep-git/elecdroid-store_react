@@ -24,7 +24,7 @@ const Header = () => {
                 <span className='droid'>Droid</span>
             </Link>
 
-            <div className='menu' onClick={ () => setMenu(!menu) }>
+            <div className='menu' onClick={() => setMenu(!menu)}>
                 {menu ? <HiX /> : <HiOutlineMenuAlt4 />}
             </div>
 

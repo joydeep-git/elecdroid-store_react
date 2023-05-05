@@ -1,11 +1,12 @@
 import React from 'react';
 
 import "../SCSS/Home.scss";
+import HeroSection from '../Components/HeroSection';
 
 const Home = () => {
     return (
         <div>
-            Home
+            <HeroSection name={"ElecDroid Store"} />
         </div>
     )
 }
