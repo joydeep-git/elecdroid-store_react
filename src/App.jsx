@@ -11,6 +11,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import ErrorPage from "./Pages/ErrorPage";
 import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="*" element={<ErrorPage />} />
 
       </Routes>
+      <Footer />
     </Routers>
   );
 }

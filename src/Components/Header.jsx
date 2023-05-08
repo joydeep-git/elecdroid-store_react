@@ -33,7 +33,7 @@ const Header = () => {
                 <div className='nav'>
                     <Link to="/products" className='Link' onClick={closeMenu}>Products</Link>
                     <Link to="/about" className='Link' onClick={closeMenu}>About</Link>
-                    <Link to="/contact" className='Link' onClick={closeMenu}>Contacts</Link>
+                    <Link to="/contact" className='Link' onClick={closeMenu}>Contact</Link>
                 </div>
 
                 <button className='login' onClick={closeMenu}>
