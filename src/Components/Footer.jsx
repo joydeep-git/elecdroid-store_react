@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import "../SCSS/Footer.scss";
+
 import { FiGithub, FiTwitter } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
 import {RiCopyrightLine} from "react-icons/ri";
-
 
 const Footer = () => {
     return (
@@ -12,9 +13,7 @@ const Footer = () => {
 
             <div className="part1">
                 <h4>Ready to get started? <br /> Talk to us today</h4>
-                <button>
-                    <Link to="/contact">Get started</Link>
-                </button>
+                    <Link to="/contact" className='button'>Get started</Link>
             </div>
 
             <div className="part2">
@@ -49,7 +48,7 @@ const Footer = () => {
 
                 <div className="division4">
                     <p>Call Us</p>
-                    <p>+91 987456321</p>
+                    <p>+91 1234567891</p>
                 </div>
 
             </div>

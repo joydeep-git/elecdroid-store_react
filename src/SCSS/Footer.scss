@@ -1,3 +1,54 @@
 @import "./Variables.scss";
 
-// .Footer{}
+.Footer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 16px;
+    background-color: $color-heading;
+    color: white;
+    padding: 2rem;
+    gap: 2rem;
+
+    .part1{
+        display: flex;
+        flex-direction: row;
+        width: 70%;
+        margin: auto;
+        justify-content: space-between;
+        box-shadow: $color-shadow-support;
+        padding: 1.5rem;
+        background-color: rgba(255, 255, 255, 1);
+        color: rgb(0, 0, 0);
+        border-radius: 15px;
+
+        h4{
+            font-size: 1rem;
+        }
+        .button{
+            font-size: 1rem;
+            display: flex;
+            padding: 8px 12px;
+            border: 1px solid black;
+            align-items: center;
+            color: $color-heading;
+            font-weight: 600;
+            &:hover{
+                border-radius: 15px;
+                transition: ease 0.5s;
+                color: black;
+            }
+        }
+    }
+
+    .part2{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+
+
+
+}
