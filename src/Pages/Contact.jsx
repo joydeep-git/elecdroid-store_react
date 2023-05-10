@@ -25,26 +25,26 @@ const Contact = () => {
 
                 <div className='data-input'>
 
-                    <input 
-                    type="text" 
-                    name="name" 
-                    id="name" placeholder='Enter your name'
-                    autoComplete='off'
-                    aut
-                    required />
+                    <input
+                        type="text"
+                        name="name"
+                        id="name" placeholder='Enter your name'
+                        autoComplete='off'
+                        aut
+                        required />
 
                     <input
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    required 
-                    placeholder='Enter your e-mail' 
-                    autoComplete='off'/>
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
+                        placeholder='Enter your e-mail'
+                        autoComplete='off' />
 
                     <textarea
-                    autoComplete='off'
-                    name="message" 
-                    id="message" placeholder='Enter the message' ></textarea>
+                        autoComplete='off'
+                        name="message"
+                        id="message" placeholder='Enter the message' ></textarea>
                 </div>
 
                 <button type="submit">SUBMIT</button>

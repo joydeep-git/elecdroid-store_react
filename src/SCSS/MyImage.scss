@@ -1,0 +1,38 @@
+.MyImage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+
+    .allImages {
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        width: 7rem;
+        overflow: hidden;
+        object-fit: contain;
+        gap: 0.5rem;
+
+        .img {
+            width: 100%;
+            overflow: hidden;
+            object-fit: contain;
+        }
+    }
+
+    .mainImage{
+        margin-left: 1rem;
+        grid-template-columns: 2fr;
+        width: 20rem;
+        object-fit: contain;
+        height: auto;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+
+        .mainImg{
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+}
