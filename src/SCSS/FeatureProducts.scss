@@ -1,0 +1,34 @@
+@import "./Variables.scss";
+
+.loading{
+    font-size: 1.5rem;
+}
+
+.FeatureProducts{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-bg-white;
+
+    .top-part{
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0;
+
+        p{
+            color: $color-heading;
+        }
+        h3{
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+    }
+
+    .feature-products{
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+}
