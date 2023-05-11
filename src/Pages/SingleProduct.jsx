@@ -6,6 +6,7 @@ import MyImage from '../Components/MyImage';
 import FormatPrice from '../Helpers/FormatPrice';
 import Stars from '../Components/Stars';
 import Loading from '../Helpers/Loading';
+import AddToCart from '../Components/AddToCart';
 
 import "../SCSS/SingleProduct.scss";
 
@@ -85,6 +86,11 @@ const SingleProduct = () => {
 
                     <p className='brand'>Brand: <span>{company}</span></p>
 
+                    <hr />
+
+                    {
+                        stock > 0 && <AddToCart product={singleProduct} />
+                    }
 
                 </div>
 
