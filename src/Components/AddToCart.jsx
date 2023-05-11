@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const AddToCart = ( {product} ) => {
+import { GrFormCheckmark } from 'react-icons/gr';
+
+import "../SCSS/AddToCart.scss";
+
+const AddToCart = ({ product }) => {
 
     const { id, colors, stock } = product;
 
-    console.log(id);
+    const [pickColor, setPickColor] = useState(colors[0]);
 
     return (
-        <div>AddToCart</div>
+        <div className="AddToCart">
+
+            <div className='colors'>
+                {
+                    colors.map((color, index) => {
+
+                        return (
+
+                            <div
+                                style={{ backgroundColor: color }}
+                                className="color"
+                                key={index} onClick={() => setPickColor(colors[index])} >
+
+                                {pickColor === color ? <GrFormCheckmark style={{ backgroundColor: 'white', fontSize: "0.8rem", }} /> : null}
+
+                            </div>
+                        )
+                    })
+                }
+            </div>
+
+        </div>
     )
 }
 
