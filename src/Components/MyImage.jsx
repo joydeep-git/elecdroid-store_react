@@ -8,14 +8,14 @@ const MyImage = ({ image = [{ url: "" }] }) => {
     return (
         <div className='MyImage'>
             <div className="allImages">
-                {image.map((curElm, index) => {
+                {image.map((item, index) => {
                     return (
                         <img
-                            src={curElm.url}
-                            alt={curElm.filename}
+                            src={item.url}
+                            alt={item.filename}
                             className="img"
                             key={index}
-                            onClick={() => setMainImage(curElm)}
+                            onClick={() => setMainImage(item)}
                         />
                     );
                 })}

@@ -4,6 +4,7 @@ import Product from './Product';
 import "../SCSS/FeatureProducts.scss";
 
 import { useProductContext } from '../Context/ProductContext';
+import Loading from '../Helpers/Loading';
 
 const FeatureProducts = () => {
 
@@ -13,7 +14,7 @@ const FeatureProducts = () => {
         <>
             {
                 isLoading
-                    ? <div className='loading'>...Loading</div>
+                    ? <Loading />
                     :
                     <div className='FeatureProducts'>
                         <div className='top-part'>

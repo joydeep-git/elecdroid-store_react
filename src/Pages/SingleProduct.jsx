@@ -4,6 +4,8 @@ import { useProductContext } from '../Context/ProductContext';
 import HomeNavigation from '../Components/HomeNavigation';
 import MyImage from '../Components/MyImage';
 import FormatPrice from '../Helpers/FormatPrice';
+import Stars from '../Components/Stars';
+import Loading from '../Helpers/Loading';
 
 import "../SCSS/SingleProduct.scss";
 
@@ -25,6 +27,10 @@ const SingleProduct = () => {
 
     }, []);
 
+    if (isSingleLoading) {
+        return <Loading />
+    }
+
     return (
         <div className='SingleProduct'>
 
@@ -40,9 +46,7 @@ const SingleProduct = () => {
 
                     <h2 className='name'>{name}</h2>
 
-                    <p className='review'>{reviews} review</p>
-
-                    <p className='rating'>rating:&nbsp;<span>{stars} stars</span></p>
+                    <Stars stars={stars} reviews={reviews} />
 
                     <p className='highMrp'>
                         MRP: &nbsp;
