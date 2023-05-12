@@ -7,7 +7,7 @@ const filterReducer = ( state, action ) => {
                 filter_products: [ ...action.payload ],
                 all_products: [ ...action.payload ],
             }
-
+            
         default:
             return state;
     }

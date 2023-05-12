@@ -9,7 +9,6 @@ const FilterContext = createContext();
 const initialState = {
     filter_products: [],
     all_products: [],
-    grid_view: true,
 }
 
 export const FilterContextProvider = ({ children }) => {
@@ -23,7 +22,7 @@ export const FilterContextProvider = ({ children }) => {
     }, [ products ]);
 
     return (
-        <FilterContext.Provider value={{ ...state }}>
+        <FilterContext.Provider value={{ ...state, }}>
             {children}
         </FilterContext.Provider>
     )
