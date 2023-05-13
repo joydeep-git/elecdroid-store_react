@@ -1,10 +1,30 @@
 import React from 'react';
 
+import { useFilterContext } from '../Context/filter_context';
+
 import "../SCSS/Sort.scss";
 
-const Sort = () => {
+const Sort = ({ total }) => {
+
+    const { sorting } = useFilterContext();
+
     return (
-        <div>Sort</div>
+        <div className='Sort'>
+
+            <div className='totalProducts'>
+                {total} Products
+            </div>
+
+            <div className='itemSort'>
+                <select name="sort" id="sort" onClick={sorting}>
+                    <option value="default">Default</option>
+                    <option value="lowest">Price: Low to High</option>
+                    <option value="highest">Price: High to Low</option>
+                    <option value="a-z">Name: A - Z</option>
+                    <option value="z-a">Name: Z - A</option>
+                </select>
+            </div>
+        </div>
     )
 }
 

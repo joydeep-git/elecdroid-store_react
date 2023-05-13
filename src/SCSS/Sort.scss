@@ -1,0 +1,16 @@
+@import "./Variables.scss";
+
+.Sort {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+    font-size: 16px;
+
+    .itemSort {
+        select {
+            padding: 10px;
+        }
+    }
+}
