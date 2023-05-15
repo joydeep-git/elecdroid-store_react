@@ -64,10 +64,10 @@ const filterReducer = (state, action) => {
             }
 
         case "FILTER_PRODUCTS":
-            let { all_products } = state;
+            const { all_products } = state;
             let tempFilterProduct = [...all_products];
-            let { text } = state.filters;
-            console.log(text);
+            const { text } = state.filters;
+
             if (text) {
                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
                     return curElem.name.toLowerCase().includes(text);

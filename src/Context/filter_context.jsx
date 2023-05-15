@@ -29,13 +29,16 @@ export const FilterContextProvider = ({ children }) => {
         let name = event.target.name;
         let value = event.target.value;
 
-        return dispatch({type: "UPDATE_FILTERS_VALUE", payload: { name, value } })
+        return dispatch({ type: "UPDATE_FILTERS_VALUE", payload: { name, value } })
     }
 
     useEffect(() => {
-        dispatch({ type: "FILTER_PRODUCTS"  });
-        dispatch({ type: "SORTING_PRODUCTS", payload: products,  });
-    }, [products, state.sorting_value, state.filters]);
+        dispatch({ type: "SORTING_PRODUCTS", payload: products, });
+    }, [products, state.sorting_value]);
+
+    useEffect( () => {
+        dispatch({ type: "FILTER_PRODUCTS" });
+    }, [ state.filters])
 
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
