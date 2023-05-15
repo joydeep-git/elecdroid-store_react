@@ -4,15 +4,15 @@ import { useFilterContext } from '../Context/filter_context';
 
 import "../SCSS/Sort.scss";
 
-const Sort = ({ total }) => {
+const Sort = () => {
 
-    const { sorting } = useFilterContext();
+    const { filter_products, sorting } = useFilterContext();
 
     return (
         <div className='Sort'>
 
             <div className='totalProducts'>
-                {total} Products
+                {filter_products.length} Products
             </div>
 
             <div className='itemSort'>

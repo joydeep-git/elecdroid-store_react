@@ -3,13 +3,19 @@ import React from 'react';
 import FilterSection from '../Components/FilterSection';
 import ProductList from '../Components/ProductList';
 import Sort from '../Components/Sort';
-import { useFilterContext } from '../Context/filter_context';
+
+import { useProductContext } from '../Context/ProductContext';
 
 import "../SCSS/Products.scss";
+import Loading from '../Helpers/Loading';
 
 const Products = () => {
 
-  const { filter_products } = useFilterContext();
+  const { isLoading } = useProductContext();
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="Products">
@@ -19,7 +25,7 @@ const Products = () => {
       </div>
 
       <div className='rightSection'>
-        <Sort total={filter_products.length} />
+        <Sort />
 
         <ProductList />
       </div>

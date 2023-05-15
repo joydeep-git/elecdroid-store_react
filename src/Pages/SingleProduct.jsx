@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useProductContext } from '../Context/ProductContext';
 import HomeNavigation from '../Components/HomeNavigation';
 import MyImage from '../Components/MyImage';
 import FormatPrice from '../Helpers/FormatPrice';
 import Stars from '../Components/Stars';
 import Loading from '../Helpers/Loading';
 import AddToCart from '../Components/AddToCart';
+
+import { useProductContext } from '../Context/ProductContext';
 
 import "../SCSS/SingleProduct.scss";
 
