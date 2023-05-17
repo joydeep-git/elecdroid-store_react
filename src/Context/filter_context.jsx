@@ -11,7 +11,8 @@ const initialState = {
     all_products: [],
     sorting_value: "default",
     filters: {
-        text: ""
+        text: "",
+        category: "all",
     }
 }
 
@@ -36,13 +37,13 @@ export const FilterContextProvider = ({ children }) => {
         dispatch({ type: "SORTING_PRODUCTS", payload: products, });
     }, [products, state.sorting_value]);
 
-    useEffect( () => {
-        dispatch({ type: "FILTER_PRODUCTS" });
-    }, [ state.filters])
-
     useEffect(() => {
         dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
     }, [products]);
+
+    useEffect(() => {
+        dispatch({ type: "FILTER_PRODUCTS" });
+    }, [state.filters])
 
     return (
         <FilterContext.Provider value={{ ...state, sorting, updateFilterValue }}>
