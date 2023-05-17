@@ -20,10 +20,10 @@ const FilterSection = () => {
         <div className='FilterSection'>
 
             <div className="search">
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form>
                     <input
                         type="text"
-                        name='text'
+                        name="text"
                         value={text}
                         placeholder='Search'
                         onChange={updateFilterValue} />
