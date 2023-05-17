@@ -1,12 +1,11 @@
 const filterReducer = (state, action) => {
-
     switch (action.type) {
         case "LOAD_FILTER_PRODUCTS":
             return {
                 ...state,
                 filter_products: [...action.payload],
                 all_products: [...action.payload],
-            }
+            };
 
         case "GET_SORT_VALUE":
             const userSortValue = document.getElementById("sort");
@@ -15,42 +14,7 @@ const filterReducer = (state, action) => {
             return {
                 ...state,
                 sorting_value: sort_value,
-            }
-
-        case "SORTING_PRODUCTS":
-            let newSortData;
-            let tempSortProduct = [...action.payload];
-
-            if (state.sorting_value === "default") {
-                newSortData = [...action.payload]
-            }
-
-            if (state.sorting_value === "lowest") {
-                function sortingProducts(a, b) {
-                    return a.price - b.price
-                }
-                newSortData = tempSortProduct.sort(sortingProducts);
-            }
-
-            if (state.sorting_value === "highest") {
-                function sortingProducts(a, b) {
-                    return b.price - a.price
-                }
-                newSortData = tempSortProduct.sort(sortingProducts);
-            }
-
-            if (state.sorting_value === "a-z") {
-                newSortData = tempSortProduct.sort((a, b) => a.name.localeCompare(b.name))
-            }
-
-            if (state.sorting_value === "z-a") {
-                newSortData = tempSortProduct.sort((a, b) => b.name.localeCompare(a.name))
-            }
-
-            return {
-                ...state,
-                filter_products: newSortData,
-            }
+            };
 
         case "UPDATE_FILTERS_VALUE":
             const { name, value } = action.payload;
@@ -60,10 +24,10 @@ const filterReducer = (state, action) => {
                 filters: {
                     ...state.filters,
                     [name]: value,
-                }
-            }
+                },
+            };
 
-        case "FILTER_PRODUCTS":
+        case "SORTING_AND_FILTERING_PRODUCTS":
             const { all_products } = state;
             const { text, category } = state.filters;
 
@@ -81,16 +45,35 @@ const filterReducer = (state, action) => {
                 });
             }
 
+            let newSortData;
+            let tempSortProduct = [...tempFilterProduct];
+
+            if (state.sorting_value === "default") {
+                newSortData = [...tempFilterProduct];
+            } else if (state.sorting_value === "lowest") {
+                function sortingProducts(a, b) {
+                    return a.price - b.price;
+                }
+                newSortData = tempSortProduct.sort(sortingProducts);
+            } else if (state.sorting_value === "highest") {
+                function sortingProducts(a, b) {
+                    return b.price - a.price;
+                }
+                newSortData = tempSortProduct.sort(sortingProducts);
+            } else if (state.sorting_value === "a-z") {
+                newSortData = tempSortProduct.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (state.sorting_value === "z-a") {
+                newSortData = tempSortProduct.sort((a, b) => b.name.localeCompare(a.name));
+            }
+
             return {
                 ...state,
-                filter_products: tempFilterProduct,
+                filter_products: newSortData,
             };
-
 
         default:
             return state;
     }
-
-}
+};
 
 export default filterReducer;

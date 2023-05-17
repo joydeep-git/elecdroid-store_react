@@ -27,14 +27,6 @@ export const FilterContextProvider = ({ children }) => {
         dispatch({ type: "GET_SORT_VALUE", })
     }
 
-    useEffect(() => {
-        dispatch({ type: "SORTING_PRODUCTS", payload: products, });
-    }, [products, state.sorting_value]);
-
-    useEffect(() => {
-        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
-    }, [products]);
-
     const updateFilterValue = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -43,8 +35,13 @@ export const FilterContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        dispatch({ type: "FILTER_PRODUCTS" });
-    }, [state.filters])
+        dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products })
+    }, [products]);
+
+    useEffect(() => {
+        dispatch({ type: "SORTING_AND_FILTERING_PRODUCTS" });
+    }, [products, state.sorting_value, state.filters]);
+
 
     return (
         <FilterContext.Provider value={{ ...state, sorting, updateFilterValue }}>
