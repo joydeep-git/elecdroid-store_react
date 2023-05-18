@@ -29,7 +29,7 @@ const filterReducer = (state, action) => {
 
         case "SORTING_AND_FILTERING_PRODUCTS":
             const { all_products } = state;
-            const { text, category } = state.filters;
+            const { text, category, company, color } = state.filters;
 
             let tempFilterProduct = all_products;
 
@@ -43,6 +43,18 @@ const filterReducer = (state, action) => {
                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
                     return curElem.category === category;
                 });
+            }
+
+            if (company && company !== "all") {
+                tempFilterProduct = tempFilterProduct.filter((curElem) => {
+                    return curElem.company === company
+                })
+            }
+
+            if (color && color !== "all") {
+                tempFilterProduct = tempFilterProduct.filter((curColor) => {
+                    return curColor.colors.includes(color);
+                })
             }
 
             let newSortData;
@@ -70,6 +82,18 @@ const filterReducer = (state, action) => {
                 ...state,
                 filter_products: newSortData,
             };
+
+        case "CLEAR_FILTERS":
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    text: "",
+                    category: "all",
+                    company: "all",
+                    color: "all",
+                }
+            }
 
         default:
             return state;

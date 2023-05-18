@@ -33,15 +33,15 @@ const Footer = () => {
                     <p>Follow Us</p>
                     <div>
                         <a href="https://github.com/joydeep-git">
-                            <FiGithub />
+                            <FiGithub className='icon' />
                         </a>
 
                         <a href="https://www.linkedin.com/in/joy-deepdas/">
-                            <FaLinkedinIn />
+                            <FaLinkedinIn className='icon' />
                         </a>
 
                         <a href="https://twitter.com/joy_deep_19">
-                            <FiTwitter />
+                            <FiTwitter className='icon' />
                         </a>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ const Footer = () => {
 
             <div className="part3">
 
-                <div>
+                <div className='copyright'>
                     <RiCopyrightLine />
                     ElecDroid all rights reserved.
                 </div>
