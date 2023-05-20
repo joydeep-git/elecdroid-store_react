@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../Context/cartContext';
 
 import { GrFormCheckmark } from 'react-icons/gr';
 
@@ -7,6 +8,8 @@ import "../SCSS/AddToCart.scss";
 import CartAmount from './CartAmount';
 
 const AddToCart = ({ product }) => {
+
+    const { addToCart } = useCartContext();
 
     const { id, colors, stock } = product;
 
