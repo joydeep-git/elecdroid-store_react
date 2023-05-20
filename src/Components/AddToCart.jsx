@@ -49,9 +49,8 @@ const AddToCart = ({ product }) => {
             </div>
 
             <div>
-                <button>
-                    <Link to="/cart">Go to cart</Link>
-                </button>
+                <Link to="/cart" onClick={() => addToCart(id, amount, product, colors)}>
+                    <button>Add to Cart</button></Link>
             </div>
 
         </div>
