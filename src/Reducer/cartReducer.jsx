@@ -1,9 +1,9 @@
-import React from 'react';
-
-const cartReducer = () => {
-    return (
-        <div>cartReducer</div>
-    )
+const cartReducer = ( state, action ) => {
+    
+    
+    
+    
+    return state;
 }
 
 export default cartReducer;
