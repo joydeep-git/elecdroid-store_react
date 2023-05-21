@@ -30,7 +30,6 @@ const Contact = () => {
                         name="name"
                         id="name" placeholder='Enter your name'
                         autoComplete='off'
-                        aut
                         required />
 
                     <input

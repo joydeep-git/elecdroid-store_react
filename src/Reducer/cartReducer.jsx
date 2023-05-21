@@ -1,16 +1,26 @@
 const cartReducer = (state, action) => {
 
     if (action.type === "ADD_TO_CART") {
-        const { id, amount , product , pickColor } = action.payload;
+        let { id, amount , product , pickColor } = action.payload;
 
-        console.log( "product --", product);
+        let cartProduct;
 
-        console.log( "color --", pickColor);
+        cartProduct = {
+            id: id + pickColor,
+            name: product.name,
+            image: product.image[0].url,
+            pickColor,
+            amount,
+            price: product.price,
+            max: product.stock,
+        }
+
+        return{
+            ...state,
+            cart: [ ...state.cart, cartProduct ]
+        }
 
     }
-
-
-
 
     return state;
 }

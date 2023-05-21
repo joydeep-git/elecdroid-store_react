@@ -4,19 +4,19 @@ import reducer from "../Reducer/cartReducer";
 
 const cartContext = createContext();
 
-const initialState = [{
-    cart: "",
+let initialState = {
+    cart: [],
     total_item: "",
     total_amount: "",
     shipping_fee: 50000,
-}];
+};
 
 const CartProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const addToCart = ( id, amount, pickColor, product ) => {
-        dispatch({type: "ADD_TO_CART", payload: { id, amount, pickColor , product }});
+    const addToCart = (id, amount, pickColor, product) => {
+        dispatch({ type: "ADD_TO_CART", payload: { id, amount, pickColor, product } });
     };
 
     return (
