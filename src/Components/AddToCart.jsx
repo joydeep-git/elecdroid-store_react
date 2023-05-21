@@ -13,7 +13,7 @@ const AddToCart = ({ product }) => {
 
     const { id, colors, stock } = product;
 
-    const [pickColor, setPickColor] = useState(colors[0]);
+    const [ pickColor, setPickColor] = useState(colors[0]);
 
     const [amount, setAmount] = useState(1);
 
@@ -52,8 +52,8 @@ const AddToCart = ({ product }) => {
             </div>
 
             <div>
-                <Link to="/cart" onClick={() => addToCart(id, amount, product, colors)}>
-                    <button>Add to Cart</button></Link>
+                <Link to="/cart">
+                    <button onClick={() => addToCart(id, amount, pickColor, product)}>Add to Cart</button></Link>
             </div>
 
         </div>
