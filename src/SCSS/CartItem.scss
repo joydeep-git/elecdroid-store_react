@@ -1,31 +1,42 @@
-.CartItem{
+.CartItem {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     text-align: center;
     padding: 2rem 0;
     margin: auto;
 
-    .part-1{
+    .part-1 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         margin: auto;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 0.5rem;
 
-        img{
-            height: 2.5rem;
+        .img {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+
+            img {
+                width: 3.5rem;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
-        div{
+
+        .text {
             display: flex;
             flex-direction: column;
             text-align: left;
 
-            p{
+            p {
                 padding: 0.25rem;
                 align-items: center;
                 justify-content: center;
 
-                button{
+                button {
                     content: "";
                     height: 0.85rem;
                     width: 0.85rem;
@@ -34,5 +45,10 @@
                 }
             }
         }
+    }
+
+    .remove-icon {
+        color: red;
+        cursor: pointer;
     }
 }

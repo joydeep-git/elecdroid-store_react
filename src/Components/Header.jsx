@@ -7,8 +7,11 @@ import "../SCSS/Header.scss";
 
 import { FiShoppingCart } from "react-icons/fi";
 import Badge from '@mui/material/Badge';
+import { useCartContext } from '../Context/cartContext';
 
 const Header = () => {
+
+    const { total_item } = useCartContext();
 
     const [menu, setMenu] = useState(false);
 
@@ -41,7 +44,7 @@ const Header = () => {
                 </button>
 
                 <Link to="/cart" className='cart' onClick={closeMenu}>
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={total_item} color="primary">
                         <FiShoppingCart className='cart-icon' />
                     </Badge>
                 </Link>
