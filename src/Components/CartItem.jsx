@@ -44,7 +44,7 @@ const CartItem = ({ id, name, image, pickColor, amount, price }) => {
             </div>
 
             <div>
-                <BsFillTrashFill className='remove-icon' onClick={ () => removeItem(id) } />
+                <BsFillTrashFill className='remove-icon' onClick={() => removeItem(id)} />
             </div>
 
         </div>
