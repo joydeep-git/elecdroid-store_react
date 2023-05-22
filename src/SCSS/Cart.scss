@@ -1,0 +1,12 @@
+.Cart{
+    display: flex;
+    flex-direction: column;
+
+    .cart-heading-row{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        flex-direction: row;
+        text-align: center;
+        padding: 2rem;
+    }
+}

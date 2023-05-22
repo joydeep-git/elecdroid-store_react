@@ -24,10 +24,8 @@ const SingleProduct = () => {
     const { name, company, price, description, image, category, stock, reviews, stars } = singleProduct;
 
     useEffect(() => {
-
         getSingleProduct(`${API}?id=${id}`);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (isSingleLoading) {

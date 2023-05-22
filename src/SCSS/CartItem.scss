@@ -1,0 +1,38 @@
+.CartItem{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+    padding: 2rem 0;
+    margin: auto;
+
+    .part-1{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+
+        img{
+            height: 2.5rem;
+        }
+        div{
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+
+            p{
+                padding: 0.25rem;
+                align-items: center;
+                justify-content: center;
+
+                button{
+                    content: "";
+                    height: 0.85rem;
+                    width: 0.85rem;
+                    border: none;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}
