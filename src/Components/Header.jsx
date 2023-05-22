@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAuth0 } from '@auth0/auth0-react';
+
 import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
 
 import "../SCSS/Header.scss";
@@ -10,6 +12,8 @@ import Badge from '@mui/material/Badge';
 import { useCartContext } from '../Context/cartContext';
 
 const Header = () => {
+
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
     const { total_item } = useCartContext();
 
@@ -33,15 +37,43 @@ const Header = () => {
 
             <div className='navList' id={menu ? "open" : ""}>
 
+                {
+                    isAuthenticated
+                        ? <Link to="/">
+                            <div className='user-auth'>
+                                <img src={user.picture} alt="" />
+                                <h4 className='welcome'>{user.name}</h4>
+                            </div>
+                        </Link>
+                        : null
+                }
+
                 <div className='nav'>
                     <Link to="/products" className='Link' onClick={closeMenu}>Products</Link>
                     <Link to="/about" className='Link' onClick={closeMenu}>About</Link>
                     <Link to="/contact" className='Link' onClick={closeMenu}>Contact</Link>
                 </div>
 
-                <button className='login' onClick={closeMenu}>
-                    Login
-                </button>
+                {
+                    !isAuthenticated
+                        ? <button
+                            className='login'
+                            onClick={() => {
+                                loginWithRedirect();
+                                closeMenu();
+                            }}>
+                            Login
+                        </button>
+
+                        : <button
+                            className='login'
+                            onClick={() => {
+                                closeMenu();
+                                logout({ logoutParams: { returnTo: window.location.origin } });
+                            }}>
+                            Logout
+                        </button>
+                }
 
                 <Link to="/cart" className='cart' onClick={closeMenu}>
                     <Badge badgeContent={total_item} color="primary">

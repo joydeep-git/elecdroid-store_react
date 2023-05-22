@@ -93,6 +93,20 @@
             }
         }
     }
+
+    .user-auth {
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        img {
+            width: 2rem;
+            border-radius: 10px;
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -100,7 +114,7 @@
     .Header {
         padding: 0.5rem 1rem;
 
-        .logo{
+        .logo {
             font-size: 0.8rem;
         }
 

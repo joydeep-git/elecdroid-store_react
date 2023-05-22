@@ -2,11 +2,14 @@ import React from 'react';
 import { useCartContext } from '../Context/cartContext';
 import "../SCSS/Cart.scss";
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import CartItem from '../Components/CartItem';
 import FormatPrice from '../Helpers/FormatPrice';
 
 const Cart = () => {
+
+    const { isAuthenticated, user } = useAuth0();
 
     const { cart, clearCart, shipping_fee, total_price } = useCartContext();
 
@@ -18,6 +21,14 @@ const Cart = () => {
 
                     ?
                     <div>
+                        {
+                            isAuthenticated
+                                ? <div className='user-data'>
+                                    <img src={user.picture} alt='' />
+                                    <h3>{user.name }</h3>
+                                </div>
+                                : null
+                        }
                         <div className="cart">
                             <div className='cart-heading-row'>
                                 <p>Item</p>

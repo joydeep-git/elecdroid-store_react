@@ -36,8 +36,8 @@ const CartItem = ({ id, name, image, pickColor, amount, price }) => {
                 <div>
                     <CartAmount
                         amount={amount}
-                        setIncrease={ () => setIncrement(id) }
-                        setDecrease={ () => setDecrement(id) } />
+                        setIncrease={() => setIncrement(id)}
+                        setDecrease={() => setDecrement(id)} />
                 </div>
 
                 <div>
