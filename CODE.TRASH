@@ -1,107 +1,92 @@
-/////////////////// FILTER REDUCER OLD CODE FILE
+{
+  "sub": "google-oauth2|101194227838776527318",
+  "given_name": "Joydeep",
+  "family_name": "Das",
+  "nickname": "joydeepdas19112000",
+  "name": "Joydeep Das",
+  "picture": "https://lh3.googleusercontent.com/a/AGNmyxYteDtH_DzC-pZCOGKgrPGCmjIyxo3CpYJCWhjA2q0=s96-c",
+  "locale": "en",
+  "updated_at": "2023-05-22T16:00:46.570Z"
+}
 
-// (((((((((((((((((((((( const filterReducer = (state, action) => {
+////////CONFIGURE THE AUTHPROVIDER COMPONENT
 
-//     switch (action.type) {
-//         case "LOAD_FILTER_PRODUCTS":
-//             return {
-//                 ...state,
-//                 filter_products: [...action.payload],
-//                 all_products: [...action.payload],
-//             }
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Auth0Provider } from "@auth0/auth0-react";
 
-//         case "GET_SORT_VALUE":
-//             const userSortValue = document.getElementById("sort");
-//             const sort_value = userSortValue.options[userSortValue.selectedIndex].value;
-
-//             return {
-//                 ...state,
-//                 sorting_value: sort_value,
-//             }
-
-//         case "SORTING_PRODUCTS":
-//             let newSortData;
-//             let tempSortProduct = [...action.payload];
-
-//             if (state.sorting_value === "default") {
-//                 newSortData = [...action.payload]
-//             }
-
-//             if (state.sorting_value === "lowest") {
-//                 function sortingProducts(a, b) {
-//                     return a.price - b.price
-//                 }
-//                 newSortData = tempSortProduct.sort(sortingProducts);
-//             }
-
-//             if (state.sorting_value === "highest") {
-//                 function sortingProducts(a, b) {
-//                     return b.price - a.price
-//                 }
-//                 newSortData = tempSortProduct.sort(sortingProducts);
-//             }
-
-//             if (state.sorting_value === "a-z") {
-//                 newSortData = tempSortProduct.sort((a, b) => a.name.localeCompare(b.name))
-//             }
-
-//             if (state.sorting_value === "z-a") {
-//                 newSortData = tempSortProduct.sort((a, b) => b.name.localeCompare(a.name))
-//             }
-
-//             return {
-//                 ...state,
-//                 filter_products: newSortData,
-//             }
-
-//         case "UPDATE_FILTERS_VALUE":
-//             const { name, value } = action.payload;
-
-//             return {
-//                 ...state,
-//                 filters: {
-//                     ...state.filters,
-//                     [name]: value,
-//                 }
-//             }
-
-//         case "FILTER_PRODUCTS":
-//             const { all_products } = state;
-//             const { text, category } = state.filters;
-
-//             let tempFilterProduct = all_products;
-
-//             if (text) {
-//                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
-//                     return curElem.name.toLowerCase().includes(text.toLowerCase());
-//                 });
-//             }
-
-//             if (category && category !== "all") {
-//                 tempFilterProduct = tempFilterProduct.filter((curElem) => {
-//                     return curElem.category === category;
-//                 });
-//             }
-
-//             return {
-//                 ...state,
-//                 filter_products: tempFilterProduct,
-//             };
-
-
-//         default:
-//             return state;
-//     }
-
-// }
-
-// export default filterReducer; ))))))))))))))))))))))
+ReactDOM.render(
+  <Auth0Provider
+    domain="dev-og81mrsl1va1si6k.us.auth0.com"
+    clientId="g9tG7Kd8sW45mtfNQJXZri9ZR0ntB5mi"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
+    <App />
+  </Auth0Provider>,
+  document.getElementById("root")
+);
 
 
 
-/////////////////////////// FILTER CONTEXT OLD CODE FILE
+//////////////ADD LOGIN TOO APPLICATION
 
-    // useEffect(() => {
-    //     dispatch({ type: "FILTER_PRODUCTS" });
-    //     dispatch({ type: "SORTING_PRODUCTS", payload: products, });
-    // }, [products, state.sorting_value, state.filters]);
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const LoginButton = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  return <button onClick={() => loginWithRedirect()}>Log In</button>;
+};
+
+export default LoginButton;
+
+
+///////Add Logout to Your Application
+
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const LogoutButton = () => {
+  const { logout } = useAuth0();
+
+  return (
+    <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+      Log Out
+    </button>
+  );
+};
+
+export default LogoutButton;
+
+
+/////////Show User Profile Information
+
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const Profile = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
+  return (
+    isAuthenticated && (
+      <div>
+        <img src={user.picture} alt={user.name} />
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
+      </div>
+    )
+  );
+};
+
+export default Profile;
+
+
+////////////
