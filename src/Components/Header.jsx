@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import { useAuth0 } from '@auth0/auth0-react';
-
-import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
-
 import "../SCSS/Header.scss";
-
-import { FiShoppingCart } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
+import { useAuth0 } from '@auth0/auth0-react';
+import { FiShoppingCart } from "react-icons/fi";
+import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
 import { useCartContext } from '../Context/cartContext';
 
 const Header = () => {
 
-    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+    const [ dashboard, setDashboard ] = useState(false);
 
+    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+    console.log(user);
     const { total_item } = useCartContext();
 
     const [menu, setMenu] = useState(false);
@@ -39,10 +37,13 @@ const Header = () => {
 
                 {
                     isAuthenticated
-                        ? <Link to="/">
-                            <div className='user-auth'>
-                                <img src={user.picture} alt="" />
-                                <h4 className='welcome'>{user.name}</h4>
+                        ? <Link to="/profile">
+                            <div className='user-auth'
+                                onMouseEnter={() => setDashboard(!dashboard)}
+                                onMouseOut={() => setDashboard(!dashboard)}>
+                                <h5 className='welcome'>
+                                    {dashboard ? "profile" : user.given_name}
+                                </h5>
                             </div>
                         </Link>
                         : null

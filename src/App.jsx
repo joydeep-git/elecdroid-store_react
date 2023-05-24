@@ -12,6 +12,7 @@ import Cart from "./Pages/Cart";
 import ErrorPage from "./Pages/ErrorPage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
+import Profile from "./Pages/Profile";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />

@@ -96,15 +96,9 @@
 
     .user-auth {
         cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
 
-        img {
-            width: 2rem;
-            border-radius: 10px;
+        h5{
+            letter-spacing: 3px;
         }
     }
 }

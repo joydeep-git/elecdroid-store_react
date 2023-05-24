@@ -14,8 +14,10 @@ root.render(
       domain="dev-og81mrsl1va1si6k.us.auth0.com"
       clientId="o3Cy2Ri0Z6UduG3qnMvoxJUHB2LuruXA"
       authorizationParams={{
-        redirect_uri: window.location.origin
-      }}>
+        redirect_uri: window.location.href
+      }}
+      redirectUri={window.location.href}>
+
       <AppProvider>
         <FilterContextProvider>
           <CartProvider>
