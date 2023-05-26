@@ -94,11 +94,13 @@
         }
     }
 
-    .user-auth {
+    .icons{
         cursor: pointer;
+        color: black;
+        font-size: 1.2rem;
 
-        h5{
-            letter-spacing: 3px;
+        &:hover{
+            color: $color-heading;
         }
     }
 }

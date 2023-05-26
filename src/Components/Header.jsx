@@ -3,13 +3,11 @@ import "../SCSS/Header.scss";
 import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { useAuth0 } from '@auth0/auth0-react';
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiLogIn, FiLogOut, FiUser } from "react-icons/fi";
 import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
 import { useCartContext } from '../Context/cartContext';
 
 const Header = () => {
-
-    const [ dashboard, setDashboard ] = useState(false);
 
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
     console.log(user);
@@ -37,15 +35,7 @@ const Header = () => {
 
                 {
                     isAuthenticated
-                        ? <Link to="/profile">
-                            <div className='user-auth'
-                                onMouseEnter={() => setDashboard(!dashboard)}
-                                onMouseOut={() => setDashboard(!dashboard)}>
-                                <h5 className='welcome'>
-                                    {dashboard ? "profile" : user.given_name}
-                                </h5>
-                            </div>
-                        </Link>
+                        ? <Link to="/profile"><FiUser className='icons' title='DASHBOARD' /></Link>
                         : null
                 }
 
@@ -57,23 +47,23 @@ const Header = () => {
 
                 {
                     !isAuthenticated
-                        ? <button
-                            className='login'
-                            onClick={() => {
-                                loginWithRedirect();
-                                closeMenu();
-                            }}>
-                            Login
-                        </button>
+                        ? <FiLogIn
+                            title='LOGIN'
+                            className='icons'
+                            onClick={
+                                () => {
+                                    loginWithRedirect();
+                                    closeMenu();
+                                }} />
 
-                        : <button
-                            className='login'
-                            onClick={() => {
-                                closeMenu();
-                                logout({ logoutParams: { returnTo: window.location.origin } });
-                            }}>
-                            Logout
-                        </button>
+                        : <FiLogOut
+                            title='LOGOUT'
+                            className='icons'
+                            onClick={
+                                () => {
+                                    closeMenu();
+                                    logout({ logoutParams: { returnTo: window.location.origin } });
+                                }} />
                 }
 
                 <Link to="/cart" className='cart' onClick={closeMenu}>
