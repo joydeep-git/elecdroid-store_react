@@ -57,9 +57,11 @@ const Contact = () => {
             </form>
 
             <div className='message'>
-                <span>***</span> <br />
+                <span>***</span>
+                <br />
                 It is a live form. I will receive everything you submit.
-                <br />If you have any advice or want to share your feedback, please share it through the form. I will work on it.
+                <br />
+                Please don't hesitate to share your valuable feedback through this form.
             </div>
 
         </div>
