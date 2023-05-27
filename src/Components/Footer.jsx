@@ -5,7 +5,7 @@ import "../SCSS/Footer.scss";
 
 import { FiGithub, FiTwitter } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
-import {RiCopyrightLine} from "react-icons/ri";
+import { RiCopyrightLine } from "react-icons/ri";
 
 const Footer = () => {
     return (
@@ -13,7 +13,7 @@ const Footer = () => {
 
             <div className="part1">
                 <h4>Ready to get started? <br /> Talk to us today</h4>
-                    <Link to="/contact" className='button'>Get started</Link>
+                <Link to="/contact" className='button'>Get started</Link>
             </div>
 
             <div className="part2">

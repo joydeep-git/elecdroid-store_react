@@ -12,11 +12,10 @@ root.render(
   <React.StrictMode>
     <Auth0Provider
       domain="dev-og81mrsl1va1si6k.us.auth0.com"
-      clientId="o3Cy2Ri0Z6UduG3qnMvoxJUHB2LuruXA"
+      clientId="CaTUGg9S5Mo8pITimDuL1yBMQrYNxZuw"
       authorizationParams={{
-        redirect_uri: window.location.href
-      }}
-      redirectUri={window.location.href}>
+        redirect_uri: window.location.origin
+      }}>
 
       <AppProvider>
         <FilterContextProvider>

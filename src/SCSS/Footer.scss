@@ -11,7 +11,7 @@
     padding: $p;
 }
 
-@mixin flex($direction){
+@mixin flex($direction) {
     display: flex;
     flex-direction: $direction;
 }
@@ -25,6 +25,8 @@
     color: white;
     padding: 2rem;
     gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
 
     .part1 {
         display: flex;
@@ -37,6 +39,9 @@
         background-color: rgba(255, 255, 255, 1);
         color: rgb(0, 0, 0);
         border-radius: 15px;
+        flex-wrap: wrap;
+        text-align: center;
+        gap: 1rem;
 
         h4 {
             font-size: 1rem;
@@ -66,12 +71,14 @@
         @include ai-jc-ta(center, center, center);
 
         .division1 {
-            @include ai-jc-ta(center, center, left)
+            @include ai-jc-ta(center, center, left);
         }
 
         .division2 {
+            gap: 1rem;
+
             p {
-                font-size: 1rem;
+                font-size: 0.75rem;
             }
 
             input {
@@ -109,6 +116,7 @@
                     &:hover {
                         background-color: rgb(255, 255, 255);
                     }
+
                     .icon {
                         width: 2rem;
                         color: rgb(0, 0, 0);
@@ -118,21 +126,75 @@
         }
     }
 
-    .part3{
+    .part3 {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        @include ai-jc-ta(center, center , center );
+        @include ai-jc-ta(center, center, center);
         width: 100%;
 
-        div{
-            @include flex( column );
-            @include ai-jc-ta(center, center , center );
+        div {
+            @include flex(column);
+            @include ai-jc-ta(center, center, center);
         }
-        .copyright{
+
+        .copyright {
             display: flex;
             flex-direction: row;
             gap: 10px;
         }
     }
 
+}
+
+@media screen and (max-width: 1000px) {
+
+    .Footer {
+        font-size: 14px;
+        gap: 1.75rem;
+
+        .part1 {
+            width: 90%;
+        }
+
+        .part2 {
+            width: auto;
+            margin: auto;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .part3 {
+            gap: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .Footer {
+        font-size: 12px;
+        gap: 1.25rem;
+
+        .part1 {
+            @include ai-jc-ta(center, center, center);
+            width: 95%;
+        }
+
+        .part2 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: auto;
+            margin: auto;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .part3 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+    }
 }
