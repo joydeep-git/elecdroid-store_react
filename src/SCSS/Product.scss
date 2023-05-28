@@ -1,14 +1,17 @@
 @import "./Variables.scss";
 
-.Product{
+.Product {
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
     background-color: white;
     border-radius: 5px;
+    justify-content: center;
+    width: auto;
+    margin: auto;
 
-    .figure{
+    .figure {
         display: flex;
         background-color: $color-helper;
         padding: 0.5rem;
@@ -17,17 +20,17 @@
         object-fit: scale-down;
         border-radius: 15px;
 
-        &:hover{
+        &:hover {
             padding: 0;
             transition: ease 0.5s;
         }
 
-        img{
+        img {
             overflow: hidden;
             border-radius: 15px;
         }
 
-        figcaption{
+        figcaption {
             position: absolute;
             background-color: $color-bg-white;
             padding: 0.2rem;
@@ -38,7 +41,7 @@
         }
     }
 
-    .cardData{
+    .cardData {
         display: flex;
         width: 100%;
         flex-direction: row;
@@ -46,7 +49,7 @@
         justify-content: space-between;
         color: black;
 
-        p{
+        p {
             font-size: 0.75rem;
         }
     }

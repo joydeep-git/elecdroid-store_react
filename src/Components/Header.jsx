@@ -35,7 +35,7 @@ const Header = () => {
 
                 {
                     isAuthenticated
-                        ? <Link to="/profile"><FiUser className='icons' title='DASHBOARD' /></Link>
+                        ? <Link to="/profile" onClick={closeMenu}><FiUser className='icons' title='DASHBOARD' /></Link>
                         : null
                 }
 

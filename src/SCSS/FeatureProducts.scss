@@ -1,32 +1,35 @@
 @import "./Variables.scss";
 
-.loading{
+.loading {
     font-size: 1.5rem;
 }
 
-.FeatureProducts{
+.FeatureProducts {
     display: flex;
     flex-direction: column;
     padding: 2rem;
     align-items: center;
     justify-content: center;
     background-color: $color-bg-white;
+    margin: auto;
+    width: 100%;
 
-    .top-part{
+    .top-part {
         display: flex;
         flex-direction: column;
         margin: 1rem 0;
 
-        p{
+        p {
             color: $color-heading;
         }
-        h3{
+
+        h3 {
             font-size: 1.5rem;
             font-weight: 400;
         }
     }
 
-    .feature-products{
+    .feature-products {
         display: flex;
         gap: 2rem;
         flex-wrap: wrap;
