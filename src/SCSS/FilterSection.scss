@@ -14,6 +14,10 @@
         text-align: left;
     }
 
+    .filter-button {
+        display: none;
+    }
+
     .search {
 
         input {
@@ -33,6 +37,19 @@
             flex-direction: row;
             flex-wrap: wrap;
             gap: 10px;
+
+            button {
+                padding: 5px;
+                border: 1px solid black;
+                cursor: pointer;
+
+                &:hover {
+                    border-color: green;
+                    background-color: black;
+                    color: white;
+                    transition: 200ms ease;
+                }
+            }
         }
     }
 
@@ -50,6 +67,14 @@
             justify-content: center;
             gap: 5px;
 
+            .all {
+                cursor: pointer;
+
+                &:hover {
+                    font-weight: 600;
+                }
+            }
+
             .color-btn {
                 content: "";
                 width: 1.5rem;
@@ -59,6 +84,10 @@
                 cursor: pointer;
                 align-items: center;
                 justify-content: center;
+
+                &:hover {
+                    border: 4px solid rgb(0, 47, 255);
+                }
 
                 .check-icon {
                     background-color: rgb(100, 100, 100);
@@ -76,10 +105,10 @@
             cursor: pointer;
 
             &:hover {
-                background-color: aliceblue;
+                background-color: black;
+                color: white;
+                transition: 200ms ease;
             }
         }
     }
 }
-
-@media screen and (max-width: 767px) {}

@@ -10,7 +10,7 @@ import { useCartContext } from '../Context/cartContext';
 const Header = () => {
 
     const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
-    console.log(user);
+
     const { total_item } = useCartContext();
 
     const [menu, setMenu] = useState(false);

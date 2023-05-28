@@ -73,15 +73,15 @@ const FilterSection = () => {
                         colorOnlyData.map((curElem, index) => {
                             if (curElem === "all") {
                                 return (
-                                    <button
-                                        className='color-btn all'
+                                    <p
+                                        className='all'
                                         name='color'
                                         value={curElem}
                                         style={{ background: 'transparent', }}
                                         key={index}
                                         onClick={updateFilterValue} >
                                         {"all".toUpperCase()}
-                                    </button>
+                                    </p>
                                 )
                             } else {
                                 return (
@@ -106,7 +106,6 @@ const FilterSection = () => {
             <div className='clear-filter'>
                 <button onClick={clearFilters}>clear filter</button>
             </div>
-
         </div>
     )
 }
