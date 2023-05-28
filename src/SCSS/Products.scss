@@ -1,12 +1,35 @@
-.Products{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+.Products {
+    display: flex;
 
-    // .leftSection{
+    .leftSection {
+        flex: 0 0 auto;
+        width: 15rem;
+    }
 
-    // }
+    .rightSection {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
 
-    // .rightSection{
+        .fixedSection {
+            flex: 0 0 auto;
+            position: sticky;
+            top: 0;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
 
-    // }
+        .scrollableSection {
+            flex: 1 1 auto;
+            overflow-y: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .leftSection {
+        width: 10rem;
+    }
 }

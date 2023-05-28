@@ -29,27 +29,27 @@ const FilterSection = () => {
         <div className='FilterSection'>
 
             <div className="search">
-                <form>
-                    <input
-                        type="text"
-                        name="text"
-                        value={text}
-                        placeholder='Search'
-                        onChange={updateFilterValue} />
-                </form>
+                <input
+                    type="text"
+                    name="text"
+                    value={text}
+                    placeholder='Search'
+                    onChange={updateFilterValue} />
             </div>
 
             <div className="category">
                 <h3>Category</h3>
-                {categoryOnlyData.map((item, index) => {
-                    return (
-                        <button
-                            key={index}
-                            name='category'
-                            value={item}
-                            onClick={updateFilterValue} >{item.toUpperCase()}</button>
-                    )
-                })}
+                <div>
+                    {categoryOnlyData.map((item, index) => {
+                        return (
+                            <button
+                                key={index}
+                                name='category'
+                                value={item}
+                                onClick={updateFilterValue} >{item.toUpperCase()}</button>
+                        )
+                    })}
+                </div>
             </div>
 
             <div className="company">
@@ -67,42 +67,45 @@ const FilterSection = () => {
             </div>
 
             <div className="colors">
-                {
-                    colorOnlyData.map((curElem, index) => {
-                        if (curElem === "all") {
-                            return (
-                                <button
-                                    className='color-btn'
-                                    name='color'
-                                    value={curElem}
-                                    style={{ background: 'transparent', }}
-                                    key={index}
-                                    onClick={updateFilterValue} >
-                                    {"all".toUpperCase()}
-                                </button>
-                            )
-                        } else {
-                            return (
-                                <button
-                                    className='color-btn'
-                                    name='color'
-                                    value={curElem}
-                                    style={{ backgroundColor: curElem, }}
-                                    key={index}
-                                    onClick={updateFilterValue} >
-                                    {
-                                        color === curElem ? <BsCheckLg className='check-icon' /> : null
-                                    }
-                                </button>
-                            )
-                        }
-                    })
-                }
+                <h3>Colors</h3>
+                <div className='color-div'>
+                    {
+                        colorOnlyData.map((curElem, index) => {
+                            if (curElem === "all") {
+                                return (
+                                    <button
+                                        className='color-btn all'
+                                        name='color'
+                                        value={curElem}
+                                        style={{ background: 'transparent', }}
+                                        key={index}
+                                        onClick={updateFilterValue} >
+                                        {"all".toUpperCase()}
+                                    </button>
+                                )
+                            } else {
+                                return (
+                                    <button
+                                        className='color-btn'
+                                        name='color'
+                                        value={curElem}
+                                        style={{ backgroundColor: curElem, }}
+                                        key={index}
+                                        onClick={updateFilterValue} >
+                                        {
+                                            color === curElem ? <BsCheckLg className='check-icon' /> : null
+                                        }
+                                    </button>
+                                )
+                            }
+                        })
+                    }
+                </div>
             </div>
 
-            <div>
+            <div className='clear-filter'>
                 <button onClick={clearFilters}>clear filter</button>
-                </div>
+            </div>
 
         </div>
     )

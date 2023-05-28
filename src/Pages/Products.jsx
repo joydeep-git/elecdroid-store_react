@@ -19,18 +19,21 @@ const Products = () => {
 
   return (
     <div className="Products">
-
       <div className='leftSection'>
         <FilterSection />
       </div>
 
       <div className='rightSection'>
-        <Sort />
+        <div className='fixedSection'>
+          <Sort />
+        </div>
 
-        <ProductList />
+        <div className='scrollableSection'>
+          <ProductList />
+        </div>
       </div>
-
     </div>
+
   )
 }
 
