@@ -1,22 +1,22 @@
 @import "./Variables.scss";
 
-.SingleProduct{
+.SingleProduct {
     display: flex;
     flex-direction: column;
     padding: 2rem;
     gap: 2rem;
     font-size: 16px;
 
-    span{
+    span {
         font-weight: 600;
     }
 
-    .container{
+    .container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
 
-        .productImage{
+        .productImage {
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,60 +24,73 @@
             justify-content: center;
         }
 
-        .productData{
+        .productData {
             display: flex;
             flex-direction: column;
             gap: 1rem;
 
-            .name{
+            .name {
                 text-transform: uppercase;
                 font-size: 1.8rem;
                 font-weight: 500;
             }
 
-            .highMrp{
-                span{
+            .highMrp {
+                span {
                     text-decoration: line-through;
                 }
             }
 
-            .lowMrp{
+            .lowMrp {
                 color: $color-btn;
-                span{
+
+                span {
                     font-weight: 700;
                 }
             }
 
-            .description{
+            .description {
                 font-size: 0.8rem;
                 width: 80%;
                 line-height: 1.2rem;
             }
 
-            .deliveryData{
+            .deliveryData {
                 display: flex;
                 flex-direction: row;
                 gap: 2rem;
 
-                .part{
+                .part {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 1rem;
 
-                    .icon{
+                    .icon {
                         padding: 0.5rem;
                         background-color: $color-border;
                         height: 2.5rem;
                         width: 2.5rem;
                         border-radius: 50%;
                     }
-                    p{
+
+                    p {
                         font-weight: 500;
                     }
                 }
             }
 
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+
+    .SingleProduct {
+
+        .container {
+            display: flex;
+            flex-direction: column;
         }
     }
 }

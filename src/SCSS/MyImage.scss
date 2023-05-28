@@ -21,7 +21,7 @@
         }
     }
 
-    .mainImage{
+    .mainImage {
         margin-left: 1rem;
         grid-template-columns: 2fr;
         width: 20rem;
@@ -31,9 +31,27 @@
         align-items: center;
         justify-content: center;
 
-        .mainImg{
+        .mainImg {
             width: 100%;
             object-fit: contain;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .MyImage {
+        display: flex;
+        flex-direction: column-reverse;
+
+        .allImages {
+            flex-direction: row;
+            width: 95%;
+        }
+
+        .mainImage {
+            margin: auto;
+            width: 95%;
         }
     }
 }

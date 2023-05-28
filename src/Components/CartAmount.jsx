@@ -1,22 +1,22 @@
 import React from 'react';
 import { FaPlus, FaMinus } from "react-icons/fa";
 
+import "../SCSS/CartAmount.scss";
+
 const CartAmount = ({ amount, setIncrease, setDecrease }) => {
     return (
         <div className='CartAmount'>
-            <div className='amountControl'>
 
-                <button onClick={setDecrease}>
-                    <FaMinus />
-                </button>
+            <button onClick={setDecrease} className='control'>
+                <FaMinus className='icon' />
+            </button>
 
-                <span>{amount}</span>
+            <span className='amount'>{amount}</span>
 
-                <button onClick={setIncrease}>
-                    <FaPlus />
-                </button>
+            <button onClick={setIncrease} className='control' >
+                <FaPlus className='icon' />
+            </button>
 
-            </div>
         </div>
     )
 }
