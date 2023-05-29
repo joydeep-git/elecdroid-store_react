@@ -20,9 +20,53 @@
             z-index: 1;
         }
 
+        #filter-section {
+            display: none;
+        }
+
         .scrollableSection {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex: 1 1 auto;
             overflow-y: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .Products {
+
+        .leftSection {
+            display: none;
+        }
+
+        .rightSection {
+            position: relative;
+
+            #filter-section {
+                display: contents;
+            }
+
+            .filter-section{
+                background-color: wheat;
+                display: flex;
+                flex-direction: row;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: red;
+
+                button{
+                    width: auto;
+                    margin: auto;
+                    cursor: pointer;
+                    padding: 10px;
+                }
+            }
         }
     }
 }

@@ -6,6 +6,8 @@
     flex-wrap: wrap;
     margin: 4rem 1rem;
     gap: 2rem;
+    align-items: center;
+    justify-content: center;
 
     .products {
         display: flex;
@@ -55,6 +57,35 @@
 
             p {
                 font-size: 0.75rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .ProductList {
+        gap: 1rem;
+
+        .products {
+            padding: 2px;
+
+            .figure {
+                height: auto;
+                width: 10rem;
+                padding: 6px;
+
+                &:hover {
+                    padding: 1px;
+                }
+            }
+
+            .cardData {
+                padding: 6px;
+
+                p {
+                    font-size: 0.6rem;
+                }
             }
         }
     }

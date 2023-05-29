@@ -6,10 +6,14 @@ import "../SCSS/Sort.scss";
 
 const Sort = () => {
 
-    const { filter_products, sorting } = useFilterContext();
+    const { filter_products, sorting, filter, setFilter } = useFilterContext();
 
     return (
         <div className='Sort'>
+
+            <div className='filters'>
+                <button onClick={() => setFilter(!filter)}>Filters</button>
+            </div>
 
             <div className='totalProducts'>
                 {filter_products.length} Products

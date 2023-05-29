@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
 import { useProductContext } from "./ProductContext";
 
@@ -24,6 +24,8 @@ export const FilterContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const [filter, setFilter] = useState(false);
+
     const sorting = () => {
         dispatch({ type: "GET_SORT_VALUE", })
     }
@@ -48,7 +50,7 @@ export const FilterContextProvider = ({ children }) => {
     }, [products, state.sorting_value, state.filters]);
 
     return (
-        <FilterContext.Provider value={{ ...state, sorting, updateFilterValue, clearFilters }}>
+        <FilterContext.Provider value={{ ...state, sorting, updateFilterValue, clearFilters, filter, setFilter }}>
             {children}
         </FilterContext.Provider>
     )
