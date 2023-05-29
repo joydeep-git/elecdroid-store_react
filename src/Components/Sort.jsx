@@ -20,7 +20,7 @@ const Sort = () => {
             </div>
 
             <div className='itemSort'>
-                <select name="sort" id="sort" onClick={sorting}>
+                <select name="sort" id="sort" onChange={sorting}>
                     <option value="default">Default</option>
                     <option value="lowest">Price: Low to High</option>
                     <option value="highest">Price: High to Low</option>
