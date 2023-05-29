@@ -28,6 +28,14 @@
         button {
             padding: 10px;
             border: 1px solid black;
+
+            &:hover {
+                border: 1px solid green;
+                background-color: black;
+                cursor: pointer;
+                color: white;
+                transition: 0.3s;
+            }
         }
     }
 }
