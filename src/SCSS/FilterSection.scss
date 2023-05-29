@@ -110,15 +110,15 @@
 }
 
 @media screen and (max-width: 650px) {
-    
-    .FilterSection{
 
-        .category{
+    .FilterSection {
 
-            div{
+        .category {
+
+            div {
                 flex-direction: row;
 
-                button{
+                button {
                     padding: 0;
                     width: fit-content;
                     font-size: 0.6rem;
@@ -126,7 +126,13 @@
             }
         }
 
-        .clear-filter{
+        .company {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .clear-filter {
             padding: 3px;
             width: auto;
             margin: auto;
