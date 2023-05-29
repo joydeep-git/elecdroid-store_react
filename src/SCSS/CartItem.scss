@@ -1,9 +1,12 @@
 .CartItem {
     display: grid;
+    width: 90%;
     grid-template-columns: repeat(5, 1fr);
-    text-align: center;
     padding: 2rem 0;
     margin: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 
     .part-1 {
         display: grid;
