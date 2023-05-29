@@ -4,8 +4,6 @@ import FilterSection from '../Components/FilterSection';
 import ProductList from '../Components/ProductList';
 import Sort from '../Components/Sort';
 
-import { RxCross2 } from "react-icons/rx";
-
 import { useFilterContext } from '../Context/filter_context';
 
 import { useProductContext } from '../Context/ProductContext';
