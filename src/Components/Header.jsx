@@ -9,7 +9,7 @@ import { useCartContext } from '../Context/cartContext';
 
 const Header = () => {
 
-    const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
     const { total_item } = useCartContext();
 
