@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import "../SCSS/HeroSection.scss";
 
-import familyShoppingImage from "../Images/family-shopping.jpg";
+import familyShoppingImage from "../Images/family-shopping-no-bg.png";
 
 const HeroSection = ({ name }) => {
     return (
