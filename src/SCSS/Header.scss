@@ -7,7 +7,6 @@
     justify-content: space-between;
     padding: 0.8rem 2rem;
     box-shadow: $color-shadow-support;
-    background-color: $color-bg-white;
     text-transform: uppercase;
 
     .logo {
@@ -49,10 +48,30 @@
             font-size: 0.8rem;
 
             .Link {
+                display: flex;
                 color: $color-black;
+                align-items: center;
+                justify-content: center;
 
                 &:hover {
                     color: $color-heading;
+                }
+            }
+
+            .signup{
+                border: none;
+                padding: 10px;
+                background-color: rgb(41, 41, 247);
+                font-size: 0.75rem;
+                font-weight: 400;
+                color: white;
+                cursor: pointer;
+
+                &:hover{
+                    opacity: 75%;
+                    color: white;
+                    border-radius: 10px;
+                    transition: 0.5s ease;
                 }
             }
         }

@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import "../SCSS/Header.scss";
 import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
-import { useAuth0 } from '@auth0/auth0-react';
-import { FiShoppingCart, FiLogIn, FiLogOut, FiUser } from "react-icons/fi";
-import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
 import { useCartContext } from '../Context/cartContext';
+import { useFilterContext } from '../Context/filter_context';
+
+import { FiShoppingCart } from "react-icons/fi";
+import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
+import { FaUserAlt } from 'react-icons/fa';
+
+import "../SCSS/Header.scss";
 
 const Header = () => {
 
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+    const { authenticated, setAuthenticated } = useFilterContext();
 
     const { total_item } = useCartContext();
 
@@ -17,6 +20,10 @@ const Header = () => {
 
     const closeMenu = () => {
         setMenu(!menu);
+    }
+
+    const handleLogout = () => {
+        setAuthenticated(false);
     }
 
     return (
@@ -33,39 +40,29 @@ const Header = () => {
 
             <div className='navList' id={menu ? "open" : ""}>
 
-                {
-                    isAuthenticated
-                        ? <Link to="/profile" onClick={closeMenu}><FiUser className='icons' title='DASHBOARD' /></Link>
-                        : null
-                }
-
                 <div className='nav'>
+                    {
+                        authenticated
+                        ? <Link to="/profile" className='Link' onClick={closeMenu}> <FaUserAlt /></Link>
+                        : null
+                    }
                     <Link to="/products" className='Link' onClick={closeMenu}>Products</Link>
                     <Link to="/about" className='Link' onClick={closeMenu}>About</Link>
                     <Link to="/contact" className='Link' onClick={closeMenu}>Contact</Link>
+
+                    {
+                        !authenticated
+                        ?
+                        <Link to="/login" className='Link signup' onClick={closeMenu}>Login</Link>
+                        :
+                        <Link to="/login" className='Link signup' onClick={ () => {
+                            closeMenu();
+                            handleLogout();
+                        }} >Log out</Link>
+                    }
+
                 </div>
-
-                {
-                    !isAuthenticated
-                        ? <FiLogIn
-                            title='LOGIN'
-                            className='icons'
-                            onClick={
-                                () => {
-                                    loginWithRedirect();
-                                    closeMenu();
-                                }} />
-
-                        : <FiLogOut
-                            title='LOGOUT'
-                            className='icons'
-                            onClick={
-                                () => {
-                                    closeMenu();
-                                    logout({ logoutParams: { returnTo: window.location.origin } });
-                                }} />
-                }
-
+                
                 <Link to="/cart" className='cart' onClick={closeMenu}>
                     <Badge badgeContent={total_item} color="primary">
                         <FiShoppingCart className='cart-icon' />

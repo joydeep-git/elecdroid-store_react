@@ -13,6 +13,8 @@ import ErrorPage from "./Pages/ErrorPage";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import Profile from "./Pages/Profile";
+import SignUp from "./Components/SignUp";
+import Login from "./Components/Login";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/singleproduct/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
 
         <Route path="*" element={<ErrorPage />} />
 

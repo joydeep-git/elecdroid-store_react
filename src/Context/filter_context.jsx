@@ -20,6 +20,10 @@ const initialState = {
 
 export const FilterContextProvider = ({ children }) => {
 
+    const [authenticated, setAuthenticated] = useState(false);
+
+    const [profileData, setProfileData] = useState();
+
     const { products } = useProductContext();
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -50,7 +54,9 @@ export const FilterContextProvider = ({ children }) => {
     }, [products, state.sorting_value, state.filters]);
 
     return (
-        <FilterContext.Provider value={{ ...state, sorting, updateFilterValue, clearFilters, filter, setFilter }}>
+        <FilterContext.Provider value={{
+            ...state, sorting, updateFilterValue, clearFilters, filter, setFilter, authenticated, setAuthenticated, profileData, setProfileData
+        }}>
             {children}
         </FilterContext.Provider>
     )
