@@ -12,7 +12,7 @@ const Sort = () => {
         <div className='Sort'>
 
             <div className='filters'>
-                <button onClick={() => setFilter(!filter)}>Filters</button>
+                <button onClick={() => setFilter(!filter)}>Filter Products</button>
             </div>
 
             <div className='totalProducts'>
