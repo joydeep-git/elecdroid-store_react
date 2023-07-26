@@ -13,7 +13,7 @@ import Loading from '../Helpers/Loading';
 
 const Products = () => {
 
-  const { filter, setFilter } = useFilterContext();
+  const { filter, updateFilterValue, filters: { text } } = useFilterContext();
 
   const { isLoading } = useProductContext();
 
@@ -24,32 +24,42 @@ const Products = () => {
   return (
     <div className="Products">
 
-      <div className='leftSection'>
-        <FilterSection />
+      <div className="search">
+        <input
+          type="text"
+          name="text"
+          value={text}
+          placeholder='Search'
+          onChange={updateFilterValue} />
       </div>
 
-      <div className='rightSection'>
-
-        <div className='fixedSection'>
-          <Sort />
+      <div className='product'>
+        
+        <div className='leftSection'>
+          <FilterSection />
         </div>
 
-        {
-          filter
-            ?
-            <div className='filter-section' id='filter-section'>
-              <FilterSection />
-              <button onClick={() => setFilter(!filter)} className='close-filter' > CLOSE </button>
-            </div>
-            : null
-        }
+        <div className='rightSection'>
 
-        <div className='scrollableSection'>
-          <ProductList />
+          <div className='fixedSection'>
+            <Sort />
+          </div>
+
+          {
+            filter
+              ?
+              <div className='filter-section' id='filter-section'>
+                <FilterSection />
+              </div>
+              : null
+          }
+
+          <div className='scrollableSection'>
+            <ProductList />
+          </div>
         </div>
       </div>
     </div>
-
   )
 }
 

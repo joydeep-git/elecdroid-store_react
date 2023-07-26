@@ -1,35 +1,54 @@
 .Products {
     display: flex;
+    flex-direction: column;
 
-    .leftSection {
-        flex: 0 0 auto;
-        width: 10rem;
+    .search {
+        margin: 1rem auto 0.25rem auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input {
+            padding: 0.5rem;
+            width: 60%;
+            border: 2px solid black;
+        }
     }
 
-    .rightSection {
-        flex: 1 1 auto;
+    .product {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
 
-        .fixedSection {
+        .leftSection {
             flex: 0 0 auto;
-            position: sticky;
-            top: 0;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
+            width: 10rem;
         }
 
-        #filter-section {
-            display: none;
-        }
-
-        .scrollableSection {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .rightSection {
             flex: 1 1 auto;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+
+            #filter-section {
+                display: none;
+            }
+
+            .fixedSection {
+                flex: 0 0 auto;
+                top: 0;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+            }
+
+            .scrollableSection {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex: 1 1 auto;
+                overflow-y: auto;
+            }
         }
     }
 }
@@ -38,24 +57,17 @@
 
     .Products {
 
-        .leftSection {
-            display: none;
-        }
+        .product {
 
-        .rightSection {
-            position: relative;
-
-            #filter-section {
-                display: contents;
+            .leftSection {
+                display: none;
             }
 
-            .filter-section {
+            .rightSection {
+                position: relative;
 
-                button {
-                    width: auto;
-                    margin: auto;
-                    cursor: pointer;
-                    padding: 10px;
+                #filter-section {
+                    display: contents;
                 }
             }
         }

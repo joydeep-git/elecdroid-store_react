@@ -16,14 +16,6 @@
         display: none;
     }
 
-    .search {
-
-        input {
-            padding: 10px;
-            width: 100%;
-        }
-    }
-
     .category {
         width: 100%;
         display: flex;
@@ -107,11 +99,24 @@
             }
         }
     }
+
+    .closeBtn{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 650px) {
 
     .FilterSection {
+        position: absolute;
+        z-index: 999;
+        background: rgb(255, 255, 255);
+        margin: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: fit-content;
 
         .category {
 
@@ -136,6 +141,23 @@
             padding: 3px;
             width: auto;
             margin: auto;
+        }
+
+        .closeBtn{
+            display: contents;
+            display: flex;
+            justify-content: center;
+
+            button{
+                width: fit-content;
+                padding: 0.5rem;
+                cursor: pointer;
+
+                :hover{
+                    background-color: black;
+                    color: white;
+                }
+            }
         }
     }
 }

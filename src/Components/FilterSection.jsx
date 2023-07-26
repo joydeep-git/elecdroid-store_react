@@ -8,7 +8,7 @@ import { BsCheckLg } from "react-icons/bs";
 
 const FilterSection = () => {
 
-    const { filters: { text, color }, updateFilterValue, all_products, clearFilters } = useFilterContext();
+    const { filters: { color, company }, updateFilterValue, all_products, clearFilters, filter, setFilter } = useFilterContext();
 
     const uniqueCategory = (data, property) => {
         let newVal = data.map((e) => e[property]);
@@ -28,15 +28,6 @@ const FilterSection = () => {
     return (
         <div className='FilterSection'>
 
-            <div className="search">
-                <input
-                    type="text"
-                    name="text"
-                    value={text}
-                    placeholder='Search'
-                    onChange={updateFilterValue} />
-            </div>
-
             <div className="category">
                 <h3>Category</h3>
                 <div>
@@ -54,11 +45,11 @@ const FilterSection = () => {
 
             <div className="company">
                 <h3>Company</h3>
-                <select name="company" id="company" onChange={updateFilterValue}>
+                <select name="company" id="company" onChange={updateFilterValue} value={company}> {/* Add 'value={company}' */}
                     {
                         companyOnlyData.map((company, index) => {
                             return (
-                                <option value={company} name="company" key={index} className='company-options' >{company.toUpperCase()}
+                                <option value={company} name="company" key={index} className='company-options'>{company.toUpperCase()}
                                 </option>
                             )
                         })
@@ -77,7 +68,7 @@ const FilterSection = () => {
                                         className='all'
                                         name='color'
                                         value={curElem}
-                                        style={{ background: 'transparent', border: "none"}}
+                                        style={{ background: 'transparent', border: "none" }}
                                         key={index}
                                         onClick={updateFilterValue} >
                                         {"all".toUpperCase()}
@@ -105,6 +96,10 @@ const FilterSection = () => {
 
             <div className='clear-filter'>
                 <button onClick={clearFilters}>clear filter</button>
+            </div>
+
+            <div className='closeBtn'>
+                <button onClick={() => setFilter(!filter)} className='close-filter' > CLOSE </button>
             </div>
         </div>
     )
