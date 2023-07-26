@@ -4,7 +4,13 @@ import "../SCSS/SignUp.scss";
 import PasswordStrengthBar from 'react-password-strength-bar';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useFirebaseContext } from '../Context/FirebaseContext';
+
+import { BsGoogle } from "react-icons/bs";
+
 function SignUp() {
+
+    const { googleSignIn } = useFirebaseContext();
 
     const clearInput = document.querySelectorAll('input');
 
@@ -87,10 +93,6 @@ function SignUp() {
         } else {
             alert.classList.remove("alert");
 
-            const existingData = JSON.parse(localStorage.getItem("ACCOUNTS")) || [];
-            existingData.push(userData);
-            localStorage.setItem("ACCOUNTS", JSON.stringify(existingData));
-
             clearInput.forEach((input) => {
                 input.value = ''
             });
@@ -119,7 +121,6 @@ function SignUp() {
                         name='name'
                         id='name'
                         onChange={handleChange}
-                        required
                     />
                 </div>
 
@@ -133,7 +134,6 @@ function SignUp() {
                         name="email"
                         id="email"
                         onChange={handleChange}
-                        required
                     />
                 </div>
 
@@ -146,7 +146,6 @@ function SignUp() {
                         id="number"
                         placeholder='Enter your number'
                         onChange={handleChange}
-                        required
                     />
                 </div>
 
@@ -169,7 +168,6 @@ function SignUp() {
                         id="password"
                         placeholder='Enter password'
                         onChange={handleChange}
-                        required
                     />
                 </div>
 
@@ -183,13 +181,17 @@ function SignUp() {
                         name="confirmPassword"
                         id="confirmPassword"
                         placeholder='Confirm Password'
-                        required
                     />
                 </div>
 
                 <button
+                className='button'
                     type='submit'
                     id='register' onClick={handleSubmit}> Register </button>
+
+                <button className='button google' onClick={googleSignIn}>
+                    <span>SignUp with</span> <BsGoogle />
+                </button>
 
                 <h5>Already have an account? <br /> <Link to="/login">Login</Link></h5>
 
