@@ -35,7 +35,7 @@ const SingleProduct = () => {
     return (
         <div className='SingleProduct'>
 
-            <HomeNavigation name={name} link={"/"} linkName="HOME" />
+            <HomeNavigation name={name} link={"/products"} linkName="PRODUCTS" />
 
             <div className="container">
 

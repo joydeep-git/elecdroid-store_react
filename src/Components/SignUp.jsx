@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import "../SCSS/SignUp.scss";
 import PasswordStrengthBar from 'react-password-strength-bar';
-import { v4 as uuidv4 } from 'uuid';
 
 import { useFirebaseContext } from '../Context/FirebaseContext';
 
-import { BsGoogle } from "react-icons/bs";
+import Loading from '../Helpers/Loading';
 
 function SignUp() {
 
-    const { googleSignIn } = useFirebaseContext();
+    const [userSignUpData, setUserSignUpData] = useState({
+        name: "",
+        email: "",
+        number: "",
+        password: "",
+        pincode: "",
+        address: "",
+    });
+
+    const { authenticated, userData, setUserData, signUpUser } = useFirebaseContext();
 
     const clearInput = document.querySelectorAll('input');
 
     const redirect = useNavigate();
 
-    const generateShortId = () => {
-        const uuid = uuidv4();
-        return uuid.substring(0, 8);
-    };
+    let pass;
 
-    const [userData, setUserData] = useState({
-        id: generateShortId(),
-        name: "",
-        email: "",
-        number: "",
-        password: "",
-    });
-
-    const { password } = userData;
+    if (userData !== null && userData.password !== null) {
+        const { password } = userData;
+        pass = password;
+    }
 
     const handleChange = (e) => {
 
@@ -40,13 +40,20 @@ function SignUp() {
                 ...userData,
                 [name]: value
             }
-        })
+        });
+
+        setUserSignUpData(() => {
+            return {
+                ...userSignUpData,
+                [name]: value
+            }
+        });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const { name, email, number, password } = userData;
+        const { name, email, number, password, pincode } = userSignUpData;
 
         const alert = document.getElementById("alert");
 
@@ -78,6 +85,14 @@ function SignUp() {
             alert.className = "alert";
             alert.innerText = "Please enter valid number";
             return;
+        } else if (pincode === "") {
+            alert.className = "alert";
+            alert.innerText = "Please enter pincode";
+            return;
+        } else if (pincode.length !== 6) {
+            alert.className = "alert";
+            alert.innerText = "Please enter a valid pincode";
+            return;
         } else if (password === "") {
             alert.className = "alert";
             alert.innerText = "Please enter a password";
@@ -93,6 +108,8 @@ function SignUp() {
         } else {
             alert.classList.remove("alert");
 
+            signUpUser(email, password);
+
             clearInput.forEach((input) => {
                 input.value = ''
             });
@@ -101,104 +118,126 @@ function SignUp() {
         }
     };
 
-    return (
-        <div className="SignUp">
+    useEffect(() => {
+        if (authenticated) {
+            redirect("/products");
+        }
+    }, [authenticated, redirect]);
 
-            <form>
+    if (authenticated) {
+        <Loading />
+    } else {
+        return (
+            <div className="SignUp">
 
-                <section>
-                    <h3 className='reg'>User Registration</h3>
-                    <p className='alert' id='alert'></p>
-                </section>
+                <form>
 
-                <div className='data-input'>
+                    <section>
+                        <h3 className='reg'>User Registration</h3>
+                        <p className='alert' id='alert'></p>
+                    </section>
 
-                    <label htmlFor="name">Name</label>
+                    <div className='data-input'>
 
-                    <input
-                        type="text"
-                        placeholder='Enter your Name'
-                        name='name'
-                        id='name'
-                        onChange={handleChange}
-                    />
-                </div>
+                        <label htmlFor="name">Name</label>
 
-                <div className='data-input'>
+                        <input
+                            type="text"
+                            placeholder='Enter your Name'
+                            name='name'
+                            id='name'
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                    <label htmlFor="email">E-mail</label>
+                    <div className='data-input'>
 
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        name="email"
-                        id="email"
-                        onChange={handleChange}
-                    />
-                </div>
+                        <label htmlFor="email">E-mail</label>
 
-                <div className='data-input'>
-                    <label htmlFor="number">Number</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            name="email"
+                            id="email"
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                    <input
-                        type="number"
-                        name="number"
-                        id="number"
-                        placeholder='Enter your number'
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div className='data-input'>
+                        <label htmlFor="number">Number</label>
 
-                <div className='data-input'>
-                    <label htmlFor="gender">Gender</label>
+                        <input
+                            type="number"
+                            name="number"
+                            id="number"
+                            placeholder='Enter your number'
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                    <select name="gender" id="gender" onChange={handleChange}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
+                    <div className='data-input address'>
+                        <label htmlFor="address">Address</label>
 
-                </div>
+                        <input
+                            type="text"
+                            name="address"
+                            id="address"
+                            placeholder='Enter your address'
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div className='data-input'>
-                    <label htmlFor="password">Password</label>
+                    <div className='data-input'>
+                        <label htmlFor="pincode">Pincode</label>
 
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder='Enter password'
-                        onChange={handleChange}
-                    />
-                </div>
+                        <input
+                            type="number"
+                            name="pincode"
+                            id="pincode"
+                            placeholder='Enter your pincode'
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <PasswordStrengthBar password={password} />
+                    <div className='data-input'>
+                        <label htmlFor="password">Password</label>
 
-                <div className='data-input'>
-                    <label htmlFor="confirmPassword">Confirm <br /> Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder='Enter password'
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        placeholder='Confirm Password'
-                    />
-                </div>
+                    {userData && userData.password && userData.password.length > 0 ? (
+                        <PasswordStrengthBar password={pass} />
+                    ) : null}
 
-                <button
-                className='button'
-                    type='submit'
-                    id='register' onClick={handleSubmit}> Register </button>
+                    <div className='data-input'>
+                        <label htmlFor="confirmPassword">Confirm <br /> Password</label>
 
-                <button className='button google' onClick={googleSignIn}>
-                    <span>SignUp with</span> <BsGoogle />
-                </button>
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            id="confirmPassword"
+                            placeholder='Confirm Password'
+                        />
+                    </div>
 
-                <h5>Already have an account? <br /> <Link to="/login">Login</Link></h5>
+                    <button
+                        className='button'
+                        type='submit'
+                        id='register' onClick={handleSubmit}> Register </button>
 
-            </form>
+                    <h5>Already have an account? <br /> <Link to="/login">Login</Link></h5>
 
-        </div>
-    )
+                </form>
+
+            </div>
+        )
+    }
 }
 
 export default SignUp;

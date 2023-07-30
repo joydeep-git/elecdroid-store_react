@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useFilterContext } from '../Context/filter_context';
+import Loading from '../Helpers/Loading';
+
 import '../SCSS/SignUp.scss';
+
+import { useFirebaseContext } from '../Context/FirebaseContext';
 
 function Login() {
 
     const redirect = useNavigate();
-    const { setAuthenticated, profileData, setProfileData } = useFilterContext();
+    const clearInput = document.querySelectorAll('input');
 
-    const [userLoginData, setUserLoginData] = useState({
-        email: '',
-        password: '',
-    });
+    const {
+        authenticated, signInUser,
+        userLoginData, setUserLoginData } = useFirebaseContext();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,7 +27,6 @@ function Login() {
         e.preventDefault();
         const alert = document.getElementById('alert');
         const { email, password } = userLoginData;
-        const registeredData = localStorage.getItem('ACCOUNTS');
 
         if (email === '') {
             alert.innerText = 'Please enter an email';
@@ -35,65 +36,68 @@ function Login() {
             alert.className = 'alert';
         } else {
             alert.className = '';
+            signInUser(email, password);
 
-            const userRegData = JSON.parse(registeredData);
-
-            const userData = userRegData.find(
-                (element) => element.email === email && element.password === password
-            );
-
-            setProfileData(userData);
-
-            if (!userData) {
-                alert.innerText = 'Invalid details';
-                alert.className = 'alert';
-            } else {
-                setAuthenticated(true);
-                redirect('/profile');
-            }
+            clearInput.forEach((input) => {
+                input.value = ''
+            });
         }
     };
 
-    return (
-        <div className="SignUp">
-            <form onSubmit={handleSubmit}>
-                <h1 className="reg">Login</h1>
-                <p id="alert" className="alert"></p>
-                <div className="data-input">
-                    <label htmlFor="email">E-mail</label>
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        id="email"
-                        className="email"
-                        name="email"
-                        required
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="data-input">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        placeholder="Enter password"
-                        id="password"
-                        className="password"
-                        name="password"
-                        required
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit" id="register">
-                    Login
-                </button>
-                <h5>
-                    Don't have an account?
-                    <br />
-                    <Link to="/signup">Sign Up</Link>
-                </h5>
-            </form>
-        </div>
-    );
+    useEffect(() => {
+        if (authenticated) {
+            redirect("/products");
+        }
+    }, [authenticated]);
+
+    if (authenticated) {
+        <Loading />
+    } else {
+        return (
+            <div className="SignUp">
+                <form onSubmit={handleSubmit}>
+
+                    <section>
+                        <h1 className="reg">Login</h1>
+                        <p id="alert" className="alert"></p>
+                    </section>
+
+                    <div className="data-input">
+                        <label htmlFor="email">E-mail</label>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            id="email"
+                            className="email"
+                            name="email"
+                            required
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="data-input">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            placeholder="Enter password"
+                            id="password"
+                            className="password"
+                            name="password"
+                            required
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button type="submit" id="register" className='button'>
+                        Login
+                    </button>
+                    <h5>
+                        Don't have an account?
+                        <br />
+                        <Link to="/signup">Sign Up</Link>
+                    </h5>
+                </form>
+            </div>
+        );
+    }
 }
 
 export default Login;

@@ -1,11 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { v4 as uuidV4 } from "uuid";
 
 import { initializeApp } from "firebase/app";
 import {
-    getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged, signOut
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut
 } from "firebase/auth";
-import { getDatabase, ref, set, get, onValue, } from "firebase/database";
+import { getDatabase, ref, set, onValue, } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyByJT7TQrqHii-su-IL7LYw6gvb9Vomc_A",
@@ -24,42 +23,123 @@ const firebase = initializeApp(firebaseConfig);
 const firebaseContext = createContext();
 export const useFirebaseContext = () => useContext(firebaseContext);
 
-// FIREBASE AUTH
+// FIREBASE SERVICES IMPLEMENTATION
 const firebaseAuth = getAuth(firebase);
-
-// FIREBASE DATABASE
 const firebaseDatabase = getDatabase(firebase);
-
-
-
-
-
 
 export const FirebaseContextProvider = ({ children }) => {
 
-    // AUTHENTICATION STATE
+    // USER DETAILS STATE
+    const [userFirebaseData, setFirebaseUserData] = useState(null);
+
+    let userFirebaseId = null;
+    if (userFirebaseData !== null) {
+        userFirebaseId = userFirebaseData.uid;
+    }
+
+    const [userData, setUserData] = useState(null);
+
+    const [userLoginData, setUserLoginData] = useState({
+        email: '',
+        password: '',
+    });
+
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (error !== null) {
+            alert(error);
+            setError(null);
+        }
+    }, [error])
+
+    // AUTHENTICATION STATUS
     const [authenticated, setAuthenticated] = useState(false);
 
     // AUTHENTICATION
+    const signUpUser = (email, password) => {
+        createUserWithEmailAndPassword(firebaseAuth, email, password)
+            .catch((err) => {
+                setError(err.message);
+            });
+    };
 
-    const googleAuth = new GoogleAuthProvider();
+    const signInUser = (email, password) => {
+        signInWithEmailAndPassword(firebaseAuth, email, password)
+            .catch((err) => {
+                setError(err.message);
+            });
+    };
 
-    const googleSignIn = (e) => {
-        e.preventDefault();
-        try {
-            signInWithPopup(firebaseAuth, googleAuth);
-        } catch (e) {
-            console.log(e);
+    //// CHECKING USER AUTHENTICATION STATE
+    useEffect(() => {
+        onAuthStateChanged(firebaseAuth, (user) => {
+            if (user) {
+                setAuthenticated(true);
+                setFirebaseUserData(user);
+            } else {
+                setAuthenticated(false);
+                setFirebaseUserData(null);
+            }
+        });
+    }, []);
+
+    //// SIGNOUT USER
+    const userSignOut = () => {
+        signOut(firebaseAuth);
+        setAuthenticated(false);
+        setFirebaseUserData(null);
+        userFirebaseId = null;
+    }
+
+    //// FETCHING DATA FROM FIREBASE
+    useEffect(() => {
+        if (userFirebaseData) {
+            onValue(ref(firebaseDatabase, "users/" + userFirebaseId), (snapshot) => {
+                if (snapshot.exists()) {
+                    const fetchedData = snapshot.val();
+                    setUserData(fetchedData);
+                }
+            });
+        }
+    }, [userFirebaseData, userFirebaseId]);
+
+    //// SAVING DATA IN FIREBASE DATABASE
+    useEffect(() => {
+        if (authenticated && userFirebaseData !== null && userData !== null) {
+            if (userData.name !== userFirebaseData.displayName) {
+                set(ref(firebaseDatabase, `users/` + userFirebaseId), {
+                    ...userData,
+                });
+            }
+        }
+    }, [authenticated, userFirebaseData, userData, userFirebaseId]);
+
+    useEffect(() => {
+        console.log("userData", userData);
+    }, [userData]);
+
+    // EDIT PROFILE
+    const handleEditProfile = () => { };
+
+    // DELETE ACCOUNT
+    const handleDeleteAccount = () => {
+        if (authenticated && userFirebaseData !== null) {
+            userFirebaseData.delete().then(() => {
+                console.log("hit");
+            }).catch((err) => setError(err));
         }
     }
 
-    // SIGNOUT USER
-    const userSignOut = () => {
-        signOut(firebaseAuth);
-    }
-
     return (
-        <firebaseContext.Provider value={{ googleSignIn }}>
+        <firebaseContext.Provider value={{
+            signUpUser, signInUser, userSignOut,
+            authenticated, setAuthenticated,
+            userData, setUserData,
+            userFirebaseId, userFirebaseData,
+            userLoginData, setUserLoginData,
+            handleEditProfile, handleDeleteAccount
+        }}>
             {children}
         </firebaseContext.Provider>
     )

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { useCartContext } from '../Context/cartContext';
-import { useFilterContext } from '../Context/filter_context';
+import { useFirebaseContext } from '../Context/FirebaseContext';
 
 import { FiShoppingCart } from "react-icons/fi";
 import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
@@ -12,7 +12,7 @@ import "../SCSS/Header.scss";
 
 const Header = () => {
 
-    const { authenticated, setAuthenticated } = useFilterContext();
+    const { authenticated, setAuthenticated, userSignOut } = useFirebaseContext();
 
     const { total_item } = useCartContext();
 
@@ -20,10 +20,6 @@ const Header = () => {
 
     const closeMenu = () => {
         setMenu(!menu);
-    }
-
-    const handleLogout = () => {
-        setAuthenticated(false);
     }
 
     return (
@@ -57,7 +53,7 @@ const Header = () => {
                         :
                         <Link to="/login" className='Link signup' onClick={ () => {
                             closeMenu();
-                            handleLogout();
+                            userSignOut();
                         }} >Log out</Link>
                     }
 
