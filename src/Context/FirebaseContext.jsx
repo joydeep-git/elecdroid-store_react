@@ -30,28 +30,30 @@ const firebaseDatabase = getDatabase(firebase);
 export const FirebaseContextProvider = ({ children }) => {
 
     // USER DETAILS STATE
-    const [userFirebaseData, setFirebaseUserData] = useState(null);
-
-    let userFirebaseId = null;
-    if (userFirebaseData !== null) {
-        userFirebaseId = userFirebaseData.uid;
-    }
-
+    const [userFirebaseData, setUserFirebaseData] = useState(null);
+    const [userFirebaseId, setUserFirebaseId] = useState(null);
     const [userData, setUserData] = useState(null);
-
     const [userLoginData, setUserLoginData] = useState({
         email: '',
         password: '',
     });
-
     const [error, setError] = useState(null);
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         if (error !== null) {
             alert(error);
             setError(null);
         }
-    }, [error])
+    }, [error]);
+
+    useEffect(() => {
+        if (userFirebaseData !== null) {
+            setUserFirebaseId(userFirebaseData.uid);
+        } else {
+            setUserFirebaseId(null);
+        }
+    }, [userFirebaseData]);
 
     // AUTHENTICATION STATUS
     const [authenticated, setAuthenticated] = useState(false);
@@ -73,62 +75,72 @@ export const FirebaseContextProvider = ({ children }) => {
 
     //// CHECKING USER AUTHENTICATION STATE
     useEffect(() => {
-        onAuthStateChanged(firebaseAuth, (user) => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
             if (user) {
                 setAuthenticated(true);
-                setFirebaseUserData(user);
+                setUserFirebaseData(user);
             } else {
                 setAuthenticated(false);
-                setFirebaseUserData(null);
+                setUserFirebaseData(null);
+                setUserData(null);
             }
         });
-    }, [userFirebaseData]);
+        return () => unsubscribe();
+    }, []);
 
     //// SIGNOUT USER
     const userSignOut = () => {
         signOut(firebaseAuth);
         setAuthenticated(false);
-        setFirebaseUserData(null);
-        userFirebaseId = null;
-    }
+        setUserFirebaseData(null);
+        setUserData(null);
+    };
 
     //// FETCHING DATA FROM FIREBASE
     useEffect(() => {
         if (userFirebaseData) {
-            onValue(ref(firebaseDatabase, "users/" + userFirebaseId), (snapshot) => {
+            const userId = userFirebaseData.uid; // Use the updated userFirebaseData
+            onValue(ref(firebaseDatabase, "users/" + userId), (snapshot) => {
                 if (snapshot.exists()) {
                     const fetchedData = snapshot.val();
                     setUserData(fetchedData);
+                } else {
+                    setUserData(null);
                 }
             });
         }
-    }, [userFirebaseData, userFirebaseId]);
+    }, [userFirebaseData]);
 
     //// SAVING DATA IN FIREBASE DATABASE
     useEffect(() => {
         if (authenticated && userFirebaseData !== null && userData !== null) {
-            if (userData.name !== userFirebaseData.displayName) {
-                set(ref(firebaseDatabase, `users/` + userFirebaseId), {
-                    ...userData,
-                });
+            if (userFirebaseId) {
+                if (userData.name !== userFirebaseData.displayName) {
+                    set(ref(firebaseDatabase, `users/` + userFirebaseId), {
+                        ...userData,
+                    });
+                }
             }
         }
     }, [authenticated, userFirebaseData, userData, userFirebaseId]);
 
-    useEffect(() => {
-        console.log("userData", userData);
-    }, [userData]);
-
     // EDIT PROFILE
     const handleEditProfile = () => { };
 
-    // DELETE ACCOUNT
+    //// DELETE ACCOUNT
     const handleDeleteAccount = () => {
         if (authenticated && userFirebaseData !== null) {
-            userFirebaseData.delete().catch((err) => setError(err));
-            set(ref(firebaseDatabase, `users/` + userFirebaseId), []);
+            userFirebaseData
+                .delete()
+                .then(() => {
+                    set(ref(firebaseDatabase, `users/` + userFirebaseId), null);
+                    setAuthenticated(false);
+                })
+                .catch((err) => {
+                    setError(err);
+                });
         }
-    }
+    };
 
     return (
         <firebaseContext.Provider value={{
@@ -137,7 +149,8 @@ export const FirebaseContextProvider = ({ children }) => {
             userData, setUserData,
             userFirebaseId, userFirebaseData,
             userLoginData, setUserLoginData,
-            handleEditProfile, handleDeleteAccount
+            handleEditProfile, handleDeleteAccount,
+            editMode, setEditMode,
         }}>
             {children}
         </firebaseContext.Provider>

@@ -74,7 +74,8 @@ const Profile = () => {
             )}
 
             <div className='btns'>
-                <button onClick={handleDeleteAccount}>Delete account</button>
+                <button onClick={handleEditProfile}>EDIT ACCOUNT</button>
+                <button onClick={handleDeleteAccount}>DELETE ACCOUNT</button>
             </div>
         </div>
     );

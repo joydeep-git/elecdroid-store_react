@@ -128,7 +128,7 @@ function SignUp() {
         <Loading />
     } else {
         return (
-            <div className="SignUp">
+            <div className="SignUp" key={authenticated}>
 
                 <form>
 
