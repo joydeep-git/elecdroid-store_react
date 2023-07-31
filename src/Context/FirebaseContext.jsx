@@ -82,7 +82,7 @@ export const FirebaseContextProvider = ({ children }) => {
                 setFirebaseUserData(null);
             }
         });
-    }, []);
+    }, [userFirebaseData]);
 
     //// SIGNOUT USER
     const userSignOut = () => {
@@ -125,9 +125,8 @@ export const FirebaseContextProvider = ({ children }) => {
     // DELETE ACCOUNT
     const handleDeleteAccount = () => {
         if (authenticated && userFirebaseData !== null) {
-            userFirebaseData.delete().then(() => {
-                console.log("hit");
-            }).catch((err) => setError(err));
+            userFirebaseData.delete().catch((err) => setError(err));
+            set(ref(firebaseDatabase, `users/` + userFirebaseId), []);
         }
     }
 
