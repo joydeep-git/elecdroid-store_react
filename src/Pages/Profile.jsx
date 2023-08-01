@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import "../SCSS/Profile.scss";
 
 import { useFirebaseContext } from '../Context/FirebaseContext';
 import Loading from '../Helpers/Loading';
+import EditPage from '../Components/EditPage';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const { authenticated, userData, handleEditProfile, handleDeleteAccount } = useFirebaseContext();
+    const { authenticated, userData, handleEditProfile, editMode, setEditMode, cancelEdit } = useFirebaseContext();
 
     useEffect(() => {
         if (!authenticated) {
@@ -25,58 +28,45 @@ const Profile = () => {
             </div>
 
             {userData && (
-                <div className='details'>
-                    {
-                        userData.name
-                            ? <div className='data'>
-                                <label htmlFor="name">Name:</label>
-                                <input type="text" name="name" disabled value={userData.name || ''} />
-                            </div>
-                            : null
-                    }
+                <div className="display-data">
+                    <form>
+                        <div className='data'>
+                            <label htmlFor="name">Name:</label>
+                            <input type="text" name="name" disabled value={userData.name} />
+                        </div>
 
-                    {
-                        userData.email
-                            ? <div className='data'>
-                                <label htmlFor="email">Email:</label>
-                                <input type="email" name="email" disabled value={userData.email || ''} />
-                            </div>
-                            : null
-                    }
+                        <div className='data'>
+                            <label htmlFor="email">Email:</label>
+                            <input type="email" name="email" disabled value={userData.email} />
+                        </div>
 
-                    {
-                        userData.number
-                            ? <div className='data'>
-                                <label htmlFor="number">Number:</label>
-                                <input type="number" name="number" disabled value={userData.number || ''} />
-                            </div>
-                            : null
-                    }
+                        <div className='data'>
+                            <label htmlFor="number">Number:</label>
+                            <input type="number" name="number" disabled value={userData.number} />
+                        </div>
 
-                    {
-                        userData.pincode
-                            ? <div className='data'>
-                                <label htmlFor="pincode">Pincode:</label>
-                                <input type="number" name="pincode" disabled value={userData.pincode || ''} />
-                            </div>
-                            : null
-                    }
+                        <div className='data'>
+                            <label htmlFor="pincode">Pincode:</label>
+                            <input type="number" name="pincode" disabled value={userData.pincode} />
+                        </div>
 
-                    {
-                        userData.address
-                            ? <div className='data'>
-                                <label htmlFor="address">Address:</label>
-                                <input type="text" name="address" disabled value={userData.address || ''} />
-                            </div>
-                            : null
-                    }
+                        <div className='data'>
+                            <label htmlFor="address">Address:</label>
+                            <input type="text" name="address" disabled value={userData.address} />
+                        </div>
+                    </form>
                 </div>
             )}
 
             <div className='btns'>
                 <button onClick={handleEditProfile}>EDIT ACCOUNT</button>
-                <button onClick={handleDeleteAccount}>DELETE ACCOUNT</button>
             </div>
+
+            {
+                editMode
+                    ? <EditPage />
+                    : null
+            }
         </div>
     );
 };

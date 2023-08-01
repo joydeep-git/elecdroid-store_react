@@ -39,6 +39,7 @@ export const FirebaseContextProvider = ({ children }) => {
     });
     const [error, setError] = useState(null);
     const [editMode, setEditMode] = useState(false);
+    const [newUserData, setNewUserData] = useState(null);
 
     useEffect(() => {
         if (error !== null) {
@@ -125,22 +126,31 @@ export const FirebaseContextProvider = ({ children }) => {
     }, [authenticated, userFirebaseData, userData, userFirebaseId]);
 
     // EDIT PROFILE
-    const handleEditProfile = () => { };
-
-    //// DELETE ACCOUNT
-    const handleDeleteAccount = () => {
-        if (authenticated && userFirebaseData !== null) {
-            userFirebaseData
-                .delete()
-                .then(() => {
-                    set(ref(firebaseDatabase, `users/` + userFirebaseId), null);
-                    setAuthenticated(false);
-                })
-                .catch((err) => {
-                    setError(err);
-                });
-        }
+    const handleEditProfile = () => {
+        setEditMode(true);
     };
+
+    const cancelEdit = () => {
+        setEditMode(false);
+    }
+
+    const updateUserData = () => {
+        setUserData(newUserData);
+        setEditMode(false);
+    }
+
+    // const updateAuthEmail = (newEmail) => {
+    //     if (userFirebaseData) {
+    //         firebaseAuth.currentUser
+    //             .updateEmail(newEmail)
+    //             .then(() => {
+    //                 setError("Email updated successfully!");
+    //             })
+    //             .catch((error) => {
+    //                 setError("Error updating email: " + error.message);
+    //             });
+    //     }
+    // };
 
     return (
         <firebaseContext.Provider value={{
@@ -149,9 +159,14 @@ export const FirebaseContextProvider = ({ children }) => {
             userData, setUserData,
             userFirebaseId, userFirebaseData,
             userLoginData, setUserLoginData,
-            handleEditProfile, handleDeleteAccount,
+            handleEditProfile,
             editMode, setEditMode,
+            cancelEdit,
+            newUserData, setNewUserData,
+            updateUserData,
+            // updateAuthEmail
         }}>
+
             {children}
         </firebaseContext.Provider>
     )
