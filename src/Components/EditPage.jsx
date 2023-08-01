@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import "../SCSS/EditPage.scss";
 import { useFirebaseContext } from '../Context/FirebaseContext';
 import { useNavigate } from 'react-router-dom';
-
+import Loading from '../Helpers/Loading';
 const EditPage = () => {
 
     const navigate = useNavigate();
 
-    const { cancelEdit, userData, newUserData, setNewUserData, updateUserData,
+    const { userData, newUserData, setNewUserData, updateUserData, authenticated
     } = useFirebaseContext();
 
     useEffect(() => {
@@ -62,6 +62,18 @@ const EditPage = () => {
 
             navigate("/profile");
         }
+    }
+
+    useEffect(() => {
+        if (!authenticated) {
+            setTimeout(() => {
+                navigate("/login");
+            }, 1000);
+        }
+    }, [authenticated, navigate]);
+
+    if(!authenticated){
+        return <Loading />
     }
 
     return (
@@ -130,7 +142,7 @@ const EditPage = () => {
 
             <div className='buttons'>
                 <button onClick={handleUpdateData}>SAVE CHANGES</button>
-                <button onClick={cancelEdit}>CANCEL</button>
+                <button onClick={() => navigate("/profile")}>CANCEL</button>
             </div>
         </div>
     )
