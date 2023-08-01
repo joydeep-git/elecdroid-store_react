@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-
 import "../SCSS/EditPage.scss";
-
 import { useFirebaseContext } from '../Context/FirebaseContext';
 
 const EditPage = () => {
 
     const { cancelEdit, userData, newUserData, setNewUserData, updateUserData,
-        // updateAuthEmail 
     } = useFirebaseContext();
 
     useEffect(() => {
@@ -31,17 +28,7 @@ const EditPage = () => {
             alert.className = "alert";
             alert.innerText = "Please enter a valid name";
             return;
-        } 
-        // else if (email === "") {
-        //     alert.className = "alert";
-        //     alert.innerText = "Please enter your email";
-        //     return;
-        // } else if (!re.test(email)) {
-        //     alert.className = "alert";
-        //     alert.innerText = "Please enter a valid email";
-        //     return;
-        // } 
-        else if (number === "") {
+        } else if (number === "") {
             alert.className = "alert";
             alert.innerText = "Please enter your number";
             return;
@@ -66,10 +53,9 @@ const EditPage = () => {
             alert.innerText = "Please enter a valid address"
         } else {
             alert.classList.remove("alert");
+            alert.innerText = null;
 
             updateUserData();
-
-            // updateAuthEmail(email);
         }
     }
 
