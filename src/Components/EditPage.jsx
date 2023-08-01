@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import "../SCSS/EditPage.scss";
 import { useFirebaseContext } from '../Context/FirebaseContext';
+import { useNavigate } from 'react-router-dom';
 
 const EditPage = () => {
+
+    const navigate = useNavigate();
 
     const { cancelEdit, userData, newUserData, setNewUserData, updateUserData,
     } = useFirebaseContext();
@@ -16,9 +19,9 @@ const EditPage = () => {
 
         const alert = document.getElementById("alert");
 
-        const re = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        // const re = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        const { name, email, number, pincode, address } = newUserData;
+        const { name, number, pincode, address } = newUserData;
 
         if (name === "") {
             alert.className = "alert";
@@ -56,6 +59,8 @@ const EditPage = () => {
             alert.innerText = null;
 
             updateUserData();
+
+            navigate("/profile");
         }
     }
 

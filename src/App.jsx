@@ -15,6 +15,7 @@ import Footer from "./Components/Footer";
 import Profile from "./Pages/Profile";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
+import EditPage from "./Components/EditPage";
 
 const App = () => {
   return (
@@ -30,7 +31,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-
+        <Route path="/edit" element={<EditPage />} />
         <Route path="*" element={<ErrorPage />} />
 
       </Routes>

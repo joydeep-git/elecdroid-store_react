@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import "../SCSS/Profile.scss";
 
 import { useFirebaseContext } from '../Context/FirebaseContext';
 import Loading from '../Helpers/Loading';
-import EditPage from '../Components/EditPage';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const { authenticated, userData, handleEditProfile, editMode, setEditMode, cancelEdit } = useFirebaseContext();
+    const { authenticated, userData,
+        handleDeleteAccount } = useFirebaseContext();
+
+    const [del, setDel] = useState(false);
 
     useEffect(() => {
         if (!authenticated) {
@@ -58,15 +60,20 @@ const Profile = () => {
                 </div>
             )}
 
-            <div className='btns'>
-                <button onClick={handleEditProfile}>EDIT ACCOUNT</button>
+            <div className='editBtn'>
+                <button onClick={() => navigate("/edit")}>EDIT ACCOUNT</button>
             </div>
 
-            {
-                editMode
-                    ? <EditPage />
-                    : null
-            }
+            <div className='deleteBtn'>
+                {
+                    !del
+                        ? <button onClick={() => setDel(true)} >DELETE ACCOUNT</button>
+                        : <div>
+                            <button onClick={() => handleDeleteAccount(userData.email, userData.password)} >CONFIRM DELETE</button>
+                            <button onClick={() => setDel(false)}>CANCEL</button>
+                        </div>
+                }
+            </div>
         </div>
     );
 };
