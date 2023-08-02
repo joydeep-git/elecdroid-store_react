@@ -120,7 +120,7 @@ function SignUp() {
 
     useEffect(() => {
         if (authenticated) {
-            redirect("/profile");
+            redirect("/products");
         }
     }, [authenticated, redirect]);
 

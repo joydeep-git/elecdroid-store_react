@@ -6,7 +6,7 @@ import { useFirebaseContext } from '../Context/FirebaseContext';
 
 import { FiShoppingCart } from "react-icons/fi";
 import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
-import { FaUserAlt } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 
 import "../SCSS/Header.scss";
 
@@ -39,7 +39,7 @@ const Header = () => {
                 <div className='nav'>
                     {
                         authenticated
-                        ? <Link to="/profile" className='Link' onClick={closeMenu}> <FaUserAlt /></Link>
+                        ? <Link to="/profile" className='Link' onClick={closeMenu}> <FaUserCircle className='icon'/></Link>
                         : null
                     }
                     <Link to="/products" className='Link' onClick={closeMenu}>Products</Link>
