@@ -19,61 +19,76 @@ const Profile = () => {
         }
     }, [authenticated, navigate]);
 
-    if (!authenticated) {
+    if (!authenticated || userData === null) {
         return <Loading />;
     }
 
     return (
         <div className='Profile'>
-            <div className='title'>
-                <h1>PROFILE</h1>
-            </div>
 
-            {userData && (
-                <div className="display-data">
-                    <form>
-                        <div className='data'>
-                            <label htmlFor="name">Name:</label>
+            <form>
+                <section>
+                    <h1 className='rag'>PROFILE</h1>
+                </section>
+
+                {userData && (
+                    <div className="data">
+                        <div className='data-input'>
+                            <label htmlFor="name">Name</label>
                             <input type="text" name="name" disabled value={userData.name} />
                         </div>
 
-                        <div className='data'>
-                            <label htmlFor="email">Email:</label>
+                        <div className='data-input'>
+                            <label htmlFor="email">Email</label>
                             <input type="email" name="email" disabled value={userData.email} />
                         </div>
 
-                        <div className='data'>
-                            <label htmlFor="number">Number:</label>
+                        <div className='data-input'>
+                            <label htmlFor="number">Number</label>
                             <input type="number" name="number" disabled value={userData.number} />
                         </div>
 
-                        <div className='data'>
-                            <label htmlFor="pincode">Pincode:</label>
+                        <div className='data-input'>
+                            <label htmlFor="pincode">Pincode</label>
                             <input type="number" name="pincode" disabled value={userData.pincode} />
                         </div>
 
-                        <div className='data'>
-                            <label htmlFor="address">Address:</label>
+                        <div className='data-input'>
+                            <label htmlFor="address">Address</label>
                             <input type="text" name="address" disabled value={userData.address} />
                         </div>
-                    </form>
+                    </div>
+                )}
+
+                <div className='buttons'>
+                    <button
+                        onClick={() => navigate("/edit")}
+                        className='button'>
+                        EDIT ACCOUNT
+                    </button>
+                    {
+                        !del
+                            ? <button
+                                onClick={() => setDel(true)}
+                                className='button red-btn' >
+                                DELETE ACCOUNT
+                            </button>
+                            : <div
+                                className='deleteBtn'>
+                                <button
+                                    className='button red-btn'
+                                    onClick={() => handleDeleteAccount(userData.email, userData.password)} >
+                                    CONFIRM
+                                </button>
+                                <button
+                                    className='button green-btn' onClick={() => setDel(false)}>
+                                    CANCEL
+                                </button>
+                            </div>
+                    }
                 </div>
-            )}
 
-            <div className='editBtn'>
-                <button onClick={() => navigate("/edit")}>EDIT ACCOUNT</button>
-            </div>
-
-            <div className='deleteBtn'>
-                {
-                    !del
-                        ? <button onClick={() => setDel(true)} >DELETE ACCOUNT</button>
-                        : <div>
-                            <button onClick={() => handleDeleteAccount(userData.email, userData.password)} >CONFIRM DELETE</button>
-                            <button onClick={() => setDel(false)}>CANCEL</button>
-                        </div>
-                }
-            </div>
+            </form>
         </div>
     );
 };

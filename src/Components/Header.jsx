@@ -12,7 +12,7 @@ import "../SCSS/Header.scss";
 
 const Header = () => {
 
-    const { authenticated, setAuthenticated, userSignOut } = useFirebaseContext();
+    const { authenticated, userSignOut } = useFirebaseContext();
 
     const { total_item } = useCartContext();
 

@@ -78,14 +78,6 @@
             }
         }
 
-        .google{
-            display: flex;
-            flex-direction: row;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-        }
-
         h5 {
             margin-top: 1rem;
             text-align: center;
@@ -103,12 +95,6 @@
         }
     }
 }
-
-// @media screen and (max-width: 767px) {
-
-//     .SignUp {
-//     }
-// }
 
 @media screen and (max-width: 650px) {
 
@@ -153,9 +139,3 @@
         }
     }
 }
-
-// @media screen and (max-width: 400px) {
-
-//     .SignUp {
-//     }
-// }

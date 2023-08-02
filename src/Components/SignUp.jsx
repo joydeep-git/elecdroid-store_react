@@ -120,124 +120,122 @@ function SignUp() {
 
     useEffect(() => {
         if (authenticated) {
-            redirect("/products");
+            redirect("/profile");
         }
     }, [authenticated, redirect]);
 
     if (authenticated) {
-        <Loading />
-    } else {
-        return (
-            <div className="SignUp" key={authenticated}>
-
-                <form>
-
-                    <section>
-                        <h3 className='reg'>User Registration</h3>
-                        <p className='alert' id='alert'></p>
-                    </section>
-
-                    <div className='data-input'>
-
-                        <label htmlFor="name">Name</label>
-
-                        <input
-                            type="text"
-                            placeholder='Enter your Name'
-                            name='name'
-                            id='name'
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className='data-input'>
-
-                        <label htmlFor="email">E-mail</label>
-
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            name="email"
-                            id="email"
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className='data-input'>
-                        <label htmlFor="number">Number</label>
-
-                        <input
-                            type="number"
-                            name="number"
-                            id="number"
-                            placeholder='Enter your number'
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className='data-input address'>
-                        <label htmlFor="address">Address</label>
-
-                        <input
-                            type="text"
-                            name="address"
-                            id="address"
-                            placeholder='Enter your address'
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className='data-input'>
-                        <label htmlFor="pincode">Pincode</label>
-
-                        <input
-                            type="number"
-                            name="pincode"
-                            id="pincode"
-                            placeholder='Enter your pincode'
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    <div className='data-input'>
-                        <label htmlFor="password">Password</label>
-
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder='Enter password'
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                    {userData && userData.password && userData.password.length > 0 ? (
-                        <PasswordStrengthBar password={pass} />
-                    ) : null}
-
-                    <div className='data-input'>
-                        <label htmlFor="confirmPassword">Confirm <br /> Password</label>
-
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            id="confirmPassword"
-                            placeholder='Confirm Password'
-                        />
-                    </div>
-
-                    <button
-                        className='button'
-                        type='submit'
-                        id='register' onClick={handleSubmit}> Register </button>
-
-                    <h5>Already have an account? <br /> <Link to="/login">Login</Link></h5>
-
-                </form>
-
-            </div>
-        )
+        return <Loading />
     }
+    return (
+        <div className="SignUp" key={authenticated}>
+
+            <form>
+
+                <section>
+                    <h3 className='reg'>User Registration</h3>
+                    <p className='alert' id='alert'></p>
+                </section>
+
+                <div className='data-input'>
+
+                    <label htmlFor="name">Name</label>
+
+                    <input
+                        type="text"
+                        placeholder='Enter your Name'
+                        name='name'
+                        id='name'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className='data-input'>
+
+                    <label htmlFor="email">E-mail</label>
+
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        name="email"
+                        id="email"
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className='data-input'>
+                    <label htmlFor="number">Number</label>
+
+                    <input
+                        type="number"
+                        name="number"
+                        id="number"
+                        placeholder='Enter your number'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className='data-input address'>
+                    <label htmlFor="address">Address</label>
+
+                    <input
+                        type="text"
+                        name="address"
+                        id="address"
+                        placeholder='Enter your address'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className='data-input'>
+                    <label htmlFor="pincode">Pincode</label>
+
+                    <input
+                        type="number"
+                        name="pincode"
+                        id="pincode"
+                        placeholder='Enter your pincode'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className='data-input'>
+                    <label htmlFor="password">Password</label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder='Enter password'
+                        onChange={handleChange}
+                    />
+                </div>
+
+                {userData && userData.password && userData.password.length > 0 ? (
+                    <PasswordStrengthBar password={pass} />
+                ) : null}
+
+                <div className='data-input'>
+                    <label htmlFor="confirmPassword">Confirm <br /> Password</label>
+
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        placeholder='Confirm Password'
+                    />
+                </div>
+
+                <button
+                    className='button'
+                    id='register' onClick={handleSubmit}> Register </button>
+
+                <h5>Already have an account? <br /> <Link to="/login">Login</Link></h5>
+
+            </form>
+
+        </div>
+    )
 }
 
 export default SignUp;

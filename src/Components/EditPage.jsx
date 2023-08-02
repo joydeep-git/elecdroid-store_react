@@ -72,32 +72,33 @@ const EditPage = () => {
         }
     }, [authenticated, navigate]);
 
-    if(!authenticated){
+    if (!authenticated) {
         return <Loading />
     }
 
     return (
-        <div className="EditPage">
+        <div className="Profile">
 
             {newUserData && (
                 <form>
 
                     <section>
-                        <h3 className='reg'>User Registration</h3>
+                        <h3 className='reg'>Edit</h3>
                         <p className='alert' id='alert'></p>
                     </section>
 
-                    <div className='data-input'>
-                        <label htmlFor="name">Change name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={newUserData.name}
-                            onChange={(e) => setNewUserData({ ...newUserData, name: e.target.value })}
-                        />
-                    </div>
+                    <div className="data">
+                        <div className='data-input'>
+                            <label htmlFor="name">Change name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={newUserData.name}
+                                onChange={(e) => setNewUserData({ ...newUserData, name: e.target.value })}
+                            />
+                        </div>
 
-                    {/* <div className='data-input'>
+                        <div className='data-input'>
                         <label htmlFor="email">Change email</label>
                         <input
                             type="email"
@@ -105,45 +106,45 @@ const EditPage = () => {
                             value={newUserData.email}
                             onChange={(e) => setNewUserData({ ...newUserData, email: e.target.value })}
                         />
-                    </div> */}
-
-                    <div className='data-input'>
-                        <label htmlFor="number">Change Number</label>
-                        <input
-                            type="number"
-                            name="number"
-                            value={newUserData.number}
-                            onChange={(e) => setNewUserData({ ...newUserData, number: e.target.value })}
-                        />
                     </div>
 
-                    <div className='data-input'>
-                        <label htmlFor="pincode">Change Pincode</label>
-                        <input
-                            type="number"
-                            name="pincode"
-                            value={newUserData.pincode}
-                            onChange={(e) => setNewUserData({ ...newUserData, pincode: e.target.value })}
-                        />
-                    </div>
+                        <div className='data-input'>
+                            <label htmlFor="number">Change Number</label>
+                            <input
+                                type="number"
+                                name="number"
+                                value={newUserData.number}
+                                onChange={(e) => setNewUserData({ ...newUserData, number: e.target.value })}
+                            />
+                        </div>
 
-                    <div className='data-input'>
-                        <label htmlFor="address">Change Address</label>
-                        <input
-                            type="text"
-                            name="address"
-                            value={newUserData.address}
-                            onChange={(e) => setNewUserData({ ...newUserData, address: e.target.value })}
-                        />
+                        <div className='data-input'>
+                            <label htmlFor="pincode">Change Pincode</label>
+                            <input
+                                type="number"
+                                name="pincode"
+                                value={newUserData.pincode}
+                                onChange={(e) => setNewUserData({ ...newUserData, pincode: e.target.value })}
+                            />
+                        </div>
+
+                        <div className='data-input'>
+                            <label htmlFor="address">Change Address</label>
+                            <input
+                                type="text"
+                                name="address"
+                                value={newUserData.address}
+                                onChange={(e) => setNewUserData({ ...newUserData, address: e.target.value })}
+                            />
+                        </div>
+                    </div>
+                    <div className='buttons'>
+                        <button className='green-btn button' onClick={handleUpdateData}>SAVE CHANGES</button>
+                        <button className='red-btn button' onClick={() => navigate("/profile")}>CANCEL</button>
                     </div>
                 </form>
 
             )}
-
-            <div className='buttons'>
-                <button onClick={handleUpdateData}>SAVE CHANGES</button>
-                <button onClick={() => navigate("/profile")}>CANCEL</button>
-            </div>
         </div>
     )
 }
