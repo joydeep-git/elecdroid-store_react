@@ -7,8 +7,7 @@ const EditPage = () => {
 
     const navigate = useNavigate();
 
-    const { userData, newUserData, setNewUserData, updateUserData, authenticated
-    } = useFirebaseContext();
+    const { userData, newUserData, setNewUserData, updateUserData, authenticated } = useFirebaseContext();
 
     useEffect(() => {
         setNewUserData(userData);
@@ -98,15 +97,15 @@ const EditPage = () => {
                             />
                         </div>
 
-                        <div className='data-input'>
-                        <label htmlFor="email">Change email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={newUserData.email}
-                            onChange={(e) => setNewUserData({ ...newUserData, email: e.target.value })}
-                        />
-                    </div>
+                        {/* <div className='data-input'>
+                            <label htmlFor="email">Change email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={newUserData.email}
+                                onChange={(e) => setNewUserData({ ...newUserData, email: e.target.value })}
+                            />
+                        </div> */}
 
                         <div className='data-input'>
                             <label htmlFor="number">Change Number</label>

@@ -126,29 +126,33 @@ export const FirebaseContextProvider = ({ children }) => {
 
     const updateUserData = () => {
         setUserData(newUserData);
-        // setEditMode(false);
     }
 
-    // const updateAuthEmail = (newEmail) => {
+    // const updateAuthEmail = (oldEmail, password, newEmail) => {
     //     if (userFirebaseData) {
-    //         firebaseAuth.currentUser
-    //             .updateEmail(newEmail)
+    //         signInWithEmailAndPassword(oldEmail, password)
     //             .then(() => {
-    //                 setError("Email updated successfully!");
+    //                 firebaseAuth.currentUser
+    //                     .updateEmail(newEmail)
+    //                     .then(() => {
+    //                         setError("Email updated successfully!");
+    //                     })
+    //                     .catch((error) => {
+    //                         setError("Error updating email: " + error.message);
+    //                     });
     //             })
     //             .catch((error) => {
-    //                 setError("Error updating email: " + error.message);
+    //                 setError("Error signing in: " + error.message);
     //             });
     //     }
     // };
 
     const handleDeleteAccount = (email, password) => {
         if (authenticated && userFirebaseData !== null) {
-            // First, delete the user's data from the database
+            signInWithEmailAndPassword(firebaseAuth, email, password);
             if (userFirebaseId) {
                 set(ref(firebaseDatabase, `users/` + userFirebaseId), null)
                     .then(() => {
-                        signInWithEmailAndPassword(firebaseAuth, email, password);
                         userFirebaseData.delete()
                             .then(() => {
                                 setAuthenticated(false);
@@ -167,6 +171,11 @@ export const FirebaseContextProvider = ({ children }) => {
         }
     };
 
+    // useEffect(() => {
+    //     console.log("new user data", newUserData)
+    //     console.log("user data", userData);
+    // }, [newUserData, userData]);
+
     return (
         <firebaseContext.Provider value={{
             signUpUser, signInUser, userSignOut,
@@ -176,6 +185,7 @@ export const FirebaseContextProvider = ({ children }) => {
             userLoginData, setUserLoginData,
             newUserData, setNewUserData,
             updateUserData, handleDeleteAccount,
+            // updateAuthEmail,
         }}>
 
             {children}
