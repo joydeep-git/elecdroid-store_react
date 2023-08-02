@@ -26,6 +26,7 @@
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
+            justify-content: center;
 
             button {
                 text-align: left;
@@ -100,7 +101,7 @@
         }
     }
 
-    .closeBtn{
+    .closeBtn {
         display: none;
     }
 }
@@ -122,6 +123,7 @@
 
             div {
                 flex-direction: row;
+                gap: 0.5rem;
 
                 button {
                     padding: 0;
@@ -143,17 +145,17 @@
             margin: auto;
         }
 
-        .closeBtn{
+        .closeBtn {
             display: contents;
             display: flex;
             justify-content: center;
 
-            button{
+            button {
                 width: fit-content;
                 padding: 0.5rem;
                 cursor: pointer;
 
-                :hover{
+                :hover {
                     background-color: black;
                     color: white;
                 }
