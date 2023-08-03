@@ -98,9 +98,8 @@ export const FirebaseContextProvider = ({ children }) => {
 
     //// FETCHING DATA FROM FIREBASE
     useEffect(() => {
-        if (userFirebaseData) {
-            const userId = userFirebaseData.uid; // Use the updated userFirebaseData
-            onValue(ref(firebaseDatabase, "users/" + userId), (snapshot) => {
+        if (userFirebaseData && userFirebaseId) {
+            onValue(ref(firebaseDatabase, "users/" + userFirebaseId + "/profile"), (snapshot) => {
                 if (snapshot.exists()) {
                     const fetchedData = snapshot.val();
                     setUserData(fetchedData);
@@ -109,14 +108,14 @@ export const FirebaseContextProvider = ({ children }) => {
                 }
             });
         }
-    }, [userFirebaseData]);
+    }, [userFirebaseData, userFirebaseId]); // Add userFirebaseId to the dependency array    
 
     //// SAVING DATA IN FIREBASE DATABASE
     useEffect(() => {
         if (authenticated && userFirebaseData !== null && userData !== null) {
-            if (userFirebaseId) {
+            if (userFirebaseId && userFirebaseId) {
                 if (userData.name !== userFirebaseData.displayName) {
-                    set(ref(firebaseDatabase, `users/` + userFirebaseId), {
+                    set(ref(firebaseDatabase, `users/` + userFirebaseId + "/profile"), {
                         ...userData,
                     });
                 }
@@ -150,7 +149,7 @@ export const FirebaseContextProvider = ({ children }) => {
     const handleDeleteAccount = (email, password) => {
         if (authenticated && userFirebaseData !== null) {
             signInWithEmailAndPassword(firebaseAuth, email, password);
-            if (userFirebaseId) {
+            if (userFirebaseId && userFirebaseId) {
                 set(ref(firebaseDatabase, `users/` + userFirebaseId), null)
                     .then(() => {
                         userFirebaseData.delete()
@@ -172,9 +171,21 @@ export const FirebaseContextProvider = ({ children }) => {
     };
 
     // useEffect(() => {
-    //     console.log("new user data", newUserData)
-    //     console.log("user data", userData);
-    // }, [newUserData, userData]);
+    //     if (newUserData) {
+    //         console.log("new user data", newUserData);
+    //     } else {
+    //         console.log("no new user data");
+    //     }
+    //     if (userFirebaseData) {
+    //         console.log("user firebase data", userFirebaseData);
+    //     }
+    //     if (userFirebaseId) {
+    //         console.log("user firebase id", userFirebaseId);
+    //     }
+    //     if (userData) {
+    //         console.log("userdata", userData);
+    //     } else { console.log("no userdata") }
+    // }, [newUserData, userData, userFirebaseData, userFirebaseId]);
 
     return (
         <firebaseContext.Provider value={{
