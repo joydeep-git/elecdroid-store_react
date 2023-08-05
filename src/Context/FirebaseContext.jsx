@@ -40,6 +40,7 @@ export const FirebaseContextProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [newUserData, setNewUserData] = useState(null);
 
+    // HANDLING ERRORS AND SHOWING THEM
     useEffect(() => {
         if (error !== null) {
             alert(error);
