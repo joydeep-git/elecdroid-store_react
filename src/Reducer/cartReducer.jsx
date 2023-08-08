@@ -135,10 +135,17 @@ const cartReducer = (state, action) => {
 
             return initialVal;
         }, 0);
-        return{
+        return {
             ...state,
             total_price: total_amount,
         }
+    }
+
+    if (action.type === "LOAD_CART_DATA") {
+        return {
+            ...state,
+            cart: action.payload,
+        };
     }
 
     return state;

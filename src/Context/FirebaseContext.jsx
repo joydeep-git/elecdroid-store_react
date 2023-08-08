@@ -39,6 +39,7 @@ export const FirebaseContextProvider = ({ children }) => {
     });
     const [error, setError] = useState(null);
     const [newUserData, setNewUserData] = useState(null);
+    const [userCartData, setUserCartData] = useState([]);
 
     // HANDLING ERRORS AND SHOWING THEM
     useEffect(() => {
@@ -95,9 +96,10 @@ export const FirebaseContextProvider = ({ children }) => {
         setAuthenticated(false);
         setUserFirebaseData(null);
         setUserData(null);
+        setUserCartData([]);
     };
 
-    //// FETCHING DATA FROM FIREBASE
+    //// FETCHING PROFILE DATA FROM FIREBASE
     useEffect(() => {
         if (userFirebaseData && userFirebaseId) {
             onValue(ref(firebaseDatabase, "users/" + userFirebaseId + "/profile"), (snapshot) => {
@@ -111,7 +113,7 @@ export const FirebaseContextProvider = ({ children }) => {
         }
     }, [userFirebaseData, userFirebaseId]);
 
-    //// SAVING DATA IN FIREBASE DATABASE
+    //// SAVING PROFILE DATA IN FIREBASE DATABASE
     useEffect(() => {
         if (authenticated && userFirebaseData !== null && userData !== null) {
             if (userFirebaseId && userFirebaseId) {
@@ -152,6 +154,30 @@ export const FirebaseContextProvider = ({ children }) => {
         }
     };
 
+    // FETCHING CART DATA FROM DATABASE
+    useEffect(() => {
+        if (userFirebaseId) {
+            onValue(
+                ref(firebaseDatabase, `users/${userFirebaseId}/cart`),
+                (snapshot) => {
+                    if (snapshot.exists()) {
+                        const cartData = snapshot.val();
+                        setUserCartData(cartData);
+                    }
+                }
+            );
+        }
+    }, [userFirebaseId]);
+
+    // STORING CART DATA IN FIREBASE
+    useEffect(() => {
+        if (authenticated && userFirebaseId) {
+            if (userCartData.length > 0) {
+                set(ref(firebaseDatabase, `users/${userFirebaseId}/cart`), userCartData);
+            }
+        }
+    }, [authenticated, userFirebaseId, userCartData]);
+
     return (
         <firebaseContext.Provider value={{
             signUpUser, signInUser, userSignOut,
@@ -161,9 +187,9 @@ export const FirebaseContextProvider = ({ children }) => {
             userLoginData, setUserLoginData,
             newUserData, setNewUserData,
             updateUserData, handleDeleteAccount,
-            // updateAuthEmail,
+            userCartData, setUserCartData,
+            setError,
         }}>
-
             {children}
         </firebaseContext.Provider>
     )

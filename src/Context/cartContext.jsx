@@ -2,26 +2,29 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 
 import reducer from "../Reducer/cartReducer";
 
+import { useFirebaseContext } from "./FirebaseContext";
+
 const cartContext = createContext();
 
-const getLocalCartData = () => {
-    const localCartData = localStorage.getItem("elecdroidCart");
-    return localCartData ? JSON.parse(localCartData) : [];
-};
-
-let initialState = {
-    cart: getLocalCartData(),
-    total_item: "",
-    total_price: "",
-    shipping_fee: 8000,
-};
-
 const CartProvider = ({ children }) => {
+
+    const { userCartData, setUserCartData, authenticated, setError } = useFirebaseContext();
+
+    let initialState = {
+        cart: userCartData || [],
+        total_item: "",
+        total_price: "",
+        shipping_fee: 8000,
+    };
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const addToCart = (id, amount, pickColor, product) => {
-        dispatch({ type: "ADD_TO_CART", payload: { id, amount, pickColor, product } });
+        if (authenticated) {
+            dispatch({ type: "ADD_TO_CART", payload: { id, amount, pickColor, product } });
+        } else {
+            setError("User is not authenticated. Cannot add to cart.");
+        }
     };
 
     const removeItem = (id) => {
@@ -42,9 +45,18 @@ const CartProvider = ({ children }) => {
 
     useEffect(() => {
         dispatch({ type: "CART_TOTAL_ITEM" });
-        dispatch({type: "CART_TOTAL_PRICE"});
-        localStorage.setItem("elecdroidCart", JSON.stringify(state.cart))
+        dispatch({ type: "CART_TOTAL_PRICE" });
     }, [state.cart]);
+
+    useEffect(() => {
+        if (userCartData) {
+            dispatch({ type: "LOAD_CART_DATA", payload: userCartData });
+        }
+    }, [userCartData]);
+
+    useEffect(() => {
+        setUserCartData(state.cart);
+    }, [state.cart, setUserCartData]);
 
     return (
         <cartContext.Provider value={{ ...state, addToCart, removeItem, clearCart, setIncrement, setDecrement }}>

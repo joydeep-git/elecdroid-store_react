@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useCartContext } from '../Context/cartContext';
 
 import { GrFormCheckmark } from 'react-icons/gr';
@@ -52,8 +51,7 @@ const AddToCart = ({ product }) => {
             </div>
 
             <div className='addtocart'>
-                <Link to="/cart">
-                    <button onClick={() => addToCart(id, amount, pickColor, product)}>Add to Cart</button></Link>
+                <button onClick={() => addToCart(id, amount, pickColor, product)}>Add to Cart</button>
             </div>
 
         </div>
