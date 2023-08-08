@@ -109,7 +109,7 @@ export const FirebaseContextProvider = ({ children }) => {
                 }
             });
         }
-    }, [userFirebaseData, userFirebaseId]); // Add userFirebaseId to the dependency array    
+    }, [userFirebaseData, userFirebaseId]);
 
     //// SAVING DATA IN FIREBASE DATABASE
     useEffect(() => {
@@ -127,25 +127,6 @@ export const FirebaseContextProvider = ({ children }) => {
     const updateUserData = () => {
         setUserData(newUserData);
     }
-
-    // const updateAuthEmail = (oldEmail, password, newEmail) => {
-    //     if (userFirebaseData) {
-    //         signInWithEmailAndPassword(oldEmail, password)
-    //             .then(() => {
-    //                 firebaseAuth.currentUser
-    //                     .updateEmail(newEmail)
-    //                     .then(() => {
-    //                         setError("Email updated successfully!");
-    //                     })
-    //                     .catch((error) => {
-    //                         setError("Error updating email: " + error.message);
-    //                     });
-    //             })
-    //             .catch((error) => {
-    //                 setError("Error signing in: " + error.message);
-    //             });
-    //     }
-    // };
 
     const handleDeleteAccount = (email, password) => {
         if (authenticated && userFirebaseData !== null) {
@@ -170,23 +151,6 @@ export const FirebaseContextProvider = ({ children }) => {
             }
         }
     };
-
-    // useEffect(() => {
-    //     if (newUserData) {
-    //         console.log("new user data", newUserData);
-    //     } else {
-    //         console.log("no new user data");
-    //     }
-    //     if (userFirebaseData) {
-    //         console.log("user firebase data", userFirebaseData);
-    //     }
-    //     if (userFirebaseId) {
-    //         console.log("user firebase id", userFirebaseId);
-    //     }
-    //     if (userData) {
-    //         console.log("userdata", userData);
-    //     } else { console.log("no userdata") }
-    // }, [newUserData, userData, userFirebaseData, userFirebaseId]);
 
     return (
         <firebaseContext.Provider value={{
