@@ -178,6 +178,10 @@ export const FirebaseContextProvider = ({ children }) => {
         }
     }, [authenticated, userFirebaseId, userCartData]);
 
+    const demoLogin = () => {
+        signInWithEmailAndPassword(firebaseAuth, "demo@email.com", "123456" );
+    }
+
     return (
         <firebaseContext.Provider value={{
             signUpUser, signInUser, userSignOut,
@@ -188,7 +192,7 @@ export const FirebaseContextProvider = ({ children }) => {
             newUserData, setNewUserData,
             updateUserData, handleDeleteAccount,
             userCartData, setUserCartData,
-            setError,
+            setError, demoLogin
         }}>
             {children}
         </firebaseContext.Provider>
