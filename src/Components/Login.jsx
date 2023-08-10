@@ -99,12 +99,12 @@ function Login() {
                 </h5>
 
                 <p className='demo'>
-                    I have a dummy account also.
+                    I have a demo account also.
                     <br />
                     <button
                         className='button'
                         onClick={demoLogin}>
-                        Login with dummy account
+                        Login with demo account
                     </button>
                 </p>
 
