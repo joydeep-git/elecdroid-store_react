@@ -179,7 +179,7 @@ export const FirebaseContextProvider = ({ children }) => {
     }, [authenticated, userFirebaseId, userCartData]);
 
     const demoLogin = () => {
-        signInWithEmailAndPassword(firebaseAuth, "demo@email.com", "123456" );
+        signInWithEmailAndPassword(firebaseAuth, "demo@demo.demo", "123456" );
     }
 
     return (
