@@ -152,8 +152,8 @@
             display: flex;
             flex-direction: column;
             position: fixed;
-            height: min-content;
-            width: min-content;
+            height: fit-content;
+            width: max-content;
             top: 0;
             left: 0;
             bottom: 0;
