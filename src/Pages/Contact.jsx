@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "../SCSS/Contact.scss";
 
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Contact = () => {
+
+    useEffect(() => {
+        
+        function autoExpandTextarea() {
+            const textarea = document.getElementById('message');
+            textarea.style.height = 'auto';
+            
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        const textarea = document.getElementById('message');
+        textarea.addEventListener('input', autoExpandTextarea);
+
+        return () => {
+            textarea.removeEventListener('input', autoExpandTextarea);
+        };
+    }, []);
 
     const { user, isAuthenticated } = useAuth0();
 
@@ -49,7 +66,9 @@ const Contact = () => {
                     <textarea
                         autoComplete='off'
                         name="message"
-                        id="message" placeholder='Enter the message' ></textarea>
+                        id="message"
+                        placeholder='Enter the message'
+                    ></textarea>
                 </div>
 
                 <button type="submit">SUBMIT</button>

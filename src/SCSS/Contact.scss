@@ -48,6 +48,13 @@
                 padding: 1rem;
                 width: 75%;
                 margin: 0 auto;
+                resize: none; 
+                height: auto;
+            }
+
+            #message{
+                min-height: 100px;
+                overflow: hidden;
             }
         }
 

@@ -39,8 +39,8 @@ const Header = () => {
                 <div className='nav'>
                     {
                         authenticated
-                        ? <Link to="/profile" className='Link' onClick={closeMenu}> <FaUserCircle className='icon'/></Link>
-                        : null
+                            ? <Link to="/profile" className='Link' onClick={closeMenu}> <FaUserCircle className='icon' /></Link>
+                            : null
                     }
                     <Link to="/products" className='Link' onClick={closeMenu}>Products</Link>
                     <Link to="/about" className='Link' onClick={closeMenu}>About</Link>
@@ -48,22 +48,26 @@ const Header = () => {
 
                     {
                         !authenticated
-                        ?
-                        <Link to="/login" className='Link signup' onClick={closeMenu}>Login</Link>
-                        :
-                        <Link to="/login" className='Link signup' onClick={ () => {
-                            closeMenu();
-                            userSignOut();
-                        }} >Log out</Link>
+                            ?
+                            <Link to="/login" className='Link signup' onClick={closeMenu}>Login</Link>
+                            :
+                            <Link to="/login" className='Link signup' onClick={() => {
+                                closeMenu();
+                                userSignOut();
+                            }} >Log out</Link>
                     }
 
                 </div>
-                
+
                 <Link to="/cart" className='cart' onClick={closeMenu}>
                     <Badge badgeContent={total_item} color="primary">
                         <FiShoppingCart className='cart-icon' />
                     </Badge>
                 </Link>
+
+                <div className="menu" onClick={() => setMenu(false)}>
+                    <HiX />
+                </div>
 
             </div>
         </div>
