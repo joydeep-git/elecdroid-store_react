@@ -142,6 +142,7 @@
             display: contents;
             font-size: 1.5rem;
             cursor: pointer;
+            width: 85%;
         }
 
         .navList {
@@ -153,7 +154,7 @@
             flex-direction: column;
             position: fixed;
             height: fit-content;
-            width: max-content;
+            max-width: 65%;
             top: 0;
             left: 0;
             bottom: 0;
