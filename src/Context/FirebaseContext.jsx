@@ -40,6 +40,7 @@ export const FirebaseContextProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [newUserData, setNewUserData] = useState(null);
     const [userCartData, setUserCartData] = useState([]);
+    const [authenticated, setAuthenticated] = useState(false);
 
     // HANDLING ERRORS AND SHOWING THEM
     useEffect(() => {
@@ -56,9 +57,6 @@ export const FirebaseContextProvider = ({ children }) => {
             setUserFirebaseId(null);
         }
     }, [userFirebaseData]);
-
-    // AUTHENTICATION STATUS
-    const [authenticated, setAuthenticated] = useState(false);
 
     // AUTHENTICATION
     const signUpUser = (email, password) => {
@@ -179,7 +177,7 @@ export const FirebaseContextProvider = ({ children }) => {
     }, [authenticated, userFirebaseId, userCartData]);
 
     const demoLogin = () => {
-        signInWithEmailAndPassword(firebaseAuth, "demo@demo.demo", "123456" );
+        signInWithEmailAndPassword(firebaseAuth, "demo@demo.demo", "123456");
     }
 
     return (
@@ -192,7 +190,7 @@ export const FirebaseContextProvider = ({ children }) => {
             newUserData, setNewUserData,
             updateUserData, handleDeleteAccount,
             userCartData, setUserCartData,
-            setError, demoLogin
+            demoLogin, setError,
         }}>
             {children}
         </firebaseContext.Provider>

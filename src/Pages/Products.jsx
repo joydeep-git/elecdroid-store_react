@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FilterSection from '../Components/FilterSection';
-import ProductList from '../Components/ProductList';
+import Product from '../Components/Product';
 import Sort from '../Components/Sort';
 
 import { useFilterContext } from '../Context/filter_context';
@@ -13,7 +13,7 @@ import Loading from '../Helpers/Loading';
 
 const Products = () => {
 
-  const { filter, updateFilterValue, filters: { text } } = useFilterContext();
+  const { filter, filter_products, updateFilterValue, filters: { text } } = useFilterContext();
 
   const { isLoading } = useProductContext();
 
@@ -55,7 +55,11 @@ const Products = () => {
           }
 
           <div className='scrollableSection'>
-            <ProductList />
+            {
+              filter_products.map((item) => {
+                return <Product key={item.id} {...item} />
+              })
+            }
           </div>
         </div>
       </div>

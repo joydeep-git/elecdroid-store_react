@@ -8,7 +8,7 @@ import { BsCheckLg } from "react-icons/bs";
 
 const FilterSection = () => {
 
-    const { filters: { color, company }, updateFilterValue, all_products, clearFilters, filter, setFilter } = useFilterContext();
+    const { filters: { category, color, company }, updateFilterValue, all_products, clearFilters, filter, setFilter } = useFilterContext();
 
     const uniqueCategory = (data, property) => {
         let newVal = data.map((e) => e[property]);
@@ -32,12 +32,14 @@ const FilterSection = () => {
                 <h3>Category</h3>
                 <div>
                     {categoryOnlyData.map((item, index) => {
+                        const isActive = item === category ? 'active' : '';
                         return (
                             <button
                                 key={index}
                                 name='category'
                                 value={item}
-                                onClick={updateFilterValue} >{item.toUpperCase()}</button>
+                                onClick={updateFilterValue}
+                                className={isActive}>{item.toUpperCase()}</button>
                         )
                     })}
                 </div>

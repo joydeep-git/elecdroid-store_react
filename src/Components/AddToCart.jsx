@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCartContext } from '../Context/cartContext';
+import { useFirebaseContext } from '../Context/FirebaseContext';
 
 import { GrFormCheckmark } from 'react-icons/gr';
 
@@ -9,6 +10,8 @@ import CartAmount from './CartAmount';
 const AddToCart = ({ product }) => {
 
     const { addToCart } = useCartContext();
+
+    const { authenticated } = useFirebaseContext();
 
     const { id, colors, stock } = product;
 
@@ -22,6 +25,14 @@ const AddToCart = ({ product }) => {
 
     const setDecrease = () => {
         amount > 1 ? setAmount(amount - 1) : alert("Quantity can not be 0.")
+    }
+
+    const handleAddToCart = () => {
+        if (!authenticated) {
+            alert("User is not authenticated");
+        } else {
+            addToCart(id, amount, pickColor, product);
+        }
     }
 
     return (
@@ -51,7 +62,7 @@ const AddToCart = ({ product }) => {
             </div>
 
             <div className='addtocart'>
-                <button onClick={() => addToCart(id, amount, pickColor, product)}>Add to Cart</button>
+                <button onClick={handleAddToCart}>Add to Cart</button>
             </div>
 
         </div>

@@ -9,36 +9,34 @@
     border-radius: 5px;
     justify-content: center;
     width: auto;
-    margin: auto;
+    margin: 1rem;
 
     .figure {
         display: flex;
         background-color: $color-helper;
-        padding: 0.5rem;
         height: 10rem;
         width: 13rem;
         object-fit: scale-down;
         border-radius: 15px;
 
-        &:hover {
-            padding: 0;
-            transition: ease 0.5s;
-        }
-
         img {
             overflow: hidden;
-            border-radius: 15px;
         }
 
         figcaption {
+            visibility: hidden;
             position: absolute;
             background-color: $color-bg-white;
             padding: 0.2rem;
-            border-radius: 15px;
+            border-radius: 5px;
             font-size: 0.65rem;
             margin: 0.5rem;
             color: black;
         }
+    }
+
+    &:hover .figure figcaption{
+        visibility: visible;
     }
 
     .cardData {
@@ -48,6 +46,8 @@
         padding: 0.5rem;
         justify-content: space-between;
         color: black;
+        border: 1px solid black;
+        border-top: none;
 
         p {
             font-size: 0.75rem;
