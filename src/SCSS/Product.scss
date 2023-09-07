@@ -14,17 +14,18 @@
     .figure {
         display: flex;
         background-color: $color-helper;
-        height: 10rem;
-        width: 13rem;
+        height: 13rem;
+        width: 18rem;
         object-fit: scale-down;
         border-radius: 15px;
+        position: relative;
 
         img {
             overflow: hidden;
+            object-fit:cover;
         }
 
-        figcaption {
-            visibility: hidden;
+        .fig1 {
             position: absolute;
             background-color: $color-bg-white;
             padding: 0.2rem;
@@ -33,24 +34,32 @@
             margin: 0.5rem;
             color: black;
         }
-    }
-
-    &:hover .figure figcaption{
-        visibility: visible;
+        .fig2{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: $color-bg-white;
+            padding: 0.2rem;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            margin: 0.5rem;
+            color: black;
+        }
     }
 
     .cardData {
         display: flex;
         width: 100%;
-        flex-direction: row;
+        flex-direction: column;
         padding: 0.5rem;
+        text-align: center;
         justify-content: space-between;
         color: black;
         border: 1px solid black;
         border-top: none;
 
         p {
-            font-size: 0.75rem;
+            font-size: 1.05rem;
         }
     }
 }
