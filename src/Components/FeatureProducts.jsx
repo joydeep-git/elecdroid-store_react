@@ -10,13 +10,15 @@ const FeatureProducts = () => {
 
     const { isLoading, featureProducts } = useProductContext();
 
+    console.log(featureProducts);
+
     return (
         <>
             {
                 isLoading
                     ? <Loading />
-                    : featureProducts ?
-                        <div className='FeatureProducts'>
+                    : featureProducts.length > 0
+                        ? <div className='FeatureProducts'>
                             <div className='top-part'>
                                 <p>Check now!</p>
                                 <h3>Our feature products</h3>
@@ -29,7 +31,9 @@ const FeatureProducts = () => {
                                 }
                             </div>
                         </div>
-                        : null
+                        : <div className='FeatureProducts' style={{ 'color': 'red', "fontWeight": '600', "textTransform": "uppercase" }}>
+                            <p>product api is under maintenance</p>
+                        </div>
             }
         </>
     );
