@@ -15,23 +15,24 @@ const FeatureProducts = () => {
             {
                 isLoading
                     ? <Loading />
-                    :
-                    <div className='FeatureProducts'>
-                        <div className='top-part'>
-                            <p>Check now!</p>
-                            <h3>Our feature products</h3>
+                    : featureProducts ?
+                        <div className='FeatureProducts'>
+                            <div className='top-part'>
+                                <p>Check now!</p>
+                                <h3>Our feature products</h3>
+                            </div>
+                            <div className='feature-products'>
+                                {
+                                    featureProducts.map((item) => {
+                                        return <Product key={item.id} {...item} />
+                                    })
+                                }
+                            </div>
                         </div>
-                        <div className='feature-products'>
-                            {
-                                featureProducts.map( (item) => {
-                                    return <Product  key={item.id} {...item} />
-                                })
-                            }
-                        </div>
-                    </div>
+                        : null
             }
         </>
-    )
+    );
 }
 
 export default FeatureProducts;
